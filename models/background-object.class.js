@@ -14,7 +14,7 @@ class BackgroundObject {
         setInterval(() => {
             this.setX();
             this.x -= this.speed;
-        }, 1000 / 80);
+        }, 1000 / 60);
     }
 
     setX() {

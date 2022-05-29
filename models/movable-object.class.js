@@ -25,7 +25,13 @@ class MovableObject {
             this.imageCache[path] = img;
         })
     }
-
+    playAnimation() {
+        let i = this.currentImage % this.IMAGES_ANIMATION.length; // let i = 0 % 6; %=modolu, rest.       => 0, Rest 0
+        // i = 0,1,2,3,4,5,6,0
+        let path = this.IMAGES_ANIMATION[i];
+        this.img = this.imageCache[path];
+        this.currentImage++
+    }
 
     moveRight() {
         setInterval(() => {
