@@ -1,8 +1,16 @@
 class Barrier extends MovableObject {
-    x = 100 + Math.random() * 200;
+    x = 720;
     width = 300;
     height = 200;
-    constructor() {
+    speed = 1.5;
+
+
+    constructor(image) {
         super().loadImage('img/3. Background/Barrier/2.png')
+        this.flowLeft();
+    }
+
+    stopMove() {
+
     }
 }
