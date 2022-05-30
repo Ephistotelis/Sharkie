@@ -1,5 +1,5 @@
 class Character extends MovableObject {
-    IMAGES_ANIMATION = [
+    IMAGES_SWIMMING = [
         'img/1.Sharkie/1.IDLE/1.png',
         'img/1.Sharkie/1.IDLE/2.png',
         'img/1.Sharkie/1.IDLE/3.png',
@@ -18,15 +18,24 @@ class Character extends MovableObject {
         'img/1.Sharkie/1.IDLE/16.png',
         'img/1.Sharkie/1.IDLE/17.png',
         'img/1.Sharkie/1.IDLE/18.png',
-    ]
+    ];
+    IMAGES_GRAVITY = [
+        'img/1.Sharkie/1.IDLE/4.png',
+        'img/1.Sharkie/1.IDLE/4.png',
+        'img/1.Sharkie/1.IDLE/5.png',
+        'img/1.Sharkie/1.IDLE/4.png',
+    ];
     currentImage = 0;
     world;
     speed = 3;
+    y = 100;
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png')
-        this.loadImages(this.IMAGES_ANIMATION)
-        this.animate();
+        this.loadImages(this.IMAGES_SWIMMING);
+        this.loadImages(this.IMAGES_GRAVITY);
+        this.animate(this.IMAGES_SWIMMING);
         this.move();
+        this.applyGravity();
 
     }
     move() {
@@ -35,9 +44,13 @@ class Character extends MovableObject {
         this.moveUp();
         this.moveDown();
     }
-    animate() {
+    animate(animation) {
         setInterval(() => {
-            this.playAnimation(this.IMAGES_ANIMATION)
+            if (this.isAboveGround() && this.falling == true) {
+                this.playAnimation(this.IMAGES_GRAVITY)
+            } else {
+                this.playAnimation(animation)
+            }
         }, 1000 / 10)
 
     }

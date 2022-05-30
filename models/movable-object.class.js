@@ -9,7 +9,9 @@ class MovableObject {
     imageCache = {};
     mirrored = false;
     world;
-
+    gravity_Y = 0.5;
+    acceleration = 0.1;
+    falling = false;
     // this.world.camera_x = -this.x;
 
     loadImage(path) {
@@ -25,13 +27,22 @@ class MovableObject {
             this.imageCache[path] = img;
         })
     }
-    playAnimation() {
-        let i = this.currentImage % this.IMAGES_ANIMATION.length; // let i = 0 % 6; %=modolu, rest.       => 0, Rest 0
+
+    animate(animation) {
+        setInterval(() => {
+            this.playAnimation(animation)
+        }, 1000 / 10)
+    }
+
+
+    playAnimation(animation) {
+        let i = this.currentImage % animation.length; // let i = 0 % 6; %=modolu, rest.       => 0, Rest 0
         // i = 0,1,2,3,4,5,6,0
-        let path = this.IMAGES_ANIMATION[i];
+        let path = animation[i];
         this.img = this.imageCache[path];
         this.currentImage++
     }
+
 
     moveRight() {
         setInterval(() => {
@@ -84,11 +95,46 @@ class MovableObject {
             }
         }, 1000 / 60);
     }
+
+
     flowLeft() {
         this.speed = (Math.random() + 1) * this.speed;
         setInterval(() => {
             this.x -= this.speed;
+
         }, 1000 / 60);
+    }
+
+
+    applyGravity() {
+        setInterval(() => {
+            if (this.checkKeyboard()) {
+                this.gravity_Y = 0;
+                this.acceleration = 0.1;
+                this.falling = false;
+                return
+            } else {
+                if (this.isAboveGround()) {
+                    this.falling = true;
+                    this.y -= this.gravity_Y;
+                    this.gravity_Y -= this.acceleration;
+                }
+            }
+        }, 1000 / 30);
+    }
+
+
+    isAboveGround() {
+        return this.y < 370;
+    }
+
+
+    checkKeyboard() {
+        if (this.world.keyboard.DOWN || this.world.keyboard.UP || this.world.keyboard.LEFT || this.world.keyboard.RIGHT === true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

@@ -1,6 +1,6 @@
 class Pufferfish extends MovableObject {
     x = 200 + Math.random() * 400;
-    IMAGES_ANIMATION = [
+    IMAGES_SWIMMING = [
         'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png',
         'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim2.png',
         'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim3.png',
@@ -13,13 +13,8 @@ class Pufferfish extends MovableObject {
 
     constructor() {
         super().loadImage('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png')
-        this.loadImages(this.IMAGES_ANIMATION)
-        this.animate()
+        this.loadImages(this.IMAGES_SWIMMING)
+        this.animate(this.IMAGES_SWIMMING)
         this.flowLeft()
-    }
-    animate() {
-        setInterval(() => {
-            this.playAnimation(this.IMAGES_ANIMATION)
-        }, 1000 / 8)
     }
 }
