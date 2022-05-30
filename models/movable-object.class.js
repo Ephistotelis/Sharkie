@@ -12,6 +12,7 @@ class MovableObject {
     gravity_Y = 0.5;
     acceleration = 0.1;
     falling = false;
+    health = 100;
     // this.world.camera_x = -this.x;
 
     loadImage(path) {
@@ -137,4 +138,24 @@ class MovableObject {
         }
     }
 
+
+    draw(ctx) {
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+    }
+
+
+    drawHitbox(ctx) {
+        if (this instanceof Character || this instanceof Pufferfish || this instanceof Endboss) {
+            ctx.beginPath();
+            ctx.lineWidth = '3';
+            ctx.strokeStyle = 'blue'
+            ctx.rect(this.x, this.y, this.width, this.height)
+            ctx.stroke();
+        }
+
+    }
+
+    checkCollision(mo) {
+        return this.x + this.width > mo.x && this.y + this.height > mo.y && this.x < mo.x && this.y < mo.y + mo.height;
+    }
 }

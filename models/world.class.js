@@ -15,6 +15,24 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld()
+        this.checkCollisions()
+    }
+
+    checkCollisions() {
+        setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+                if (this.character.checkCollision(enemy)) {
+                    console.log('hit', enemy) //                                                                                                                consollog
+                    this.decreaseHealth();
+                }
+            })
+        }, 100);
+
+    }
+
+    decreaseHealth() {
+        this.character.health -= 5;
+        console.warn(this.character.health) //                                                                                                                    consollog
     }
 
     setWorld() {
@@ -33,7 +51,6 @@ class World {
         this.addObjectsToMap(this.level.enemies)
         this.addToMap(this.character)
 
-
         // draw wird immer wieder aufgerufen
         let self = this;
         requestAnimationFrame(function() {
@@ -50,8 +67,11 @@ class World {
 
 
     addToMap(mo) {
-        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height)
+        mo.draw(this.ctx);
+        mo.drawHitbox(this.ctx)
     }
+
+
 
     // für el pollo loco, mit umdrehen, bei sharky kein umdrehen :)
     /* addToMap(mo) {                                   

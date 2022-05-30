@@ -14,7 +14,7 @@ function init() {
 }
 
 document.addEventListener('keydown', (event) => {
-
+    //                                                                                                                              multi consollogs
     console.log(event)
     console.log(event['code'])
     console.log(event['keyCode'])

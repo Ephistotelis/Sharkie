@@ -8,7 +8,6 @@ class Background extends BackgroundObject {
         super().loadImage(imagePath);
         this.x = x;
         this.flowLeft();
-
     }
 
 }
