@@ -106,7 +106,7 @@ class MovableObject {
 
 
     flowLeft() {
-        this.speed = (Math.random() + 1) * this.speed;
+        this.speed = this.randomNumber(1, 5)
         setInterval(() => {
             this.x -= this.speed;
 
@@ -180,5 +180,9 @@ class MovableObject {
 
     isDead() {
         return this.health < 1;
+    }
+
+    randomNumber(min, max) {
+        return Math.random() * (max - min) + min;
     }
 }

@@ -30,10 +30,8 @@ class World {
                     console.log(enemy, 'out of canvas')
                     this.level.enemies.splice(enemy, 1)
                 }
-
             })
-        }, 1000);
-
+        }, 2000);
     }
 
 

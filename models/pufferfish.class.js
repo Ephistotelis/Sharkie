@@ -1,5 +1,6 @@
 class Pufferfish extends MovableObject {
     x = 200 + Math.random() * 400;
+    y = this.randomNumber(50, 350);
     IMAGES_SWIMMING = [
         'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png',
         'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim2.png',

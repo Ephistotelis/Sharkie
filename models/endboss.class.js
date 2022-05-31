@@ -1,5 +1,5 @@
 class Endboss extends MovableObject {
-    y = 200;
+    y = this.randomNumber(50, 300);
     x = 1500;
     width = 200;
     height = 200;
