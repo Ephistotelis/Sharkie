@@ -116,7 +116,6 @@ class MovableObject {
 
     applyGravity() {
         setInterval(() => {
-
             if (this.checkKeyboard()) {
                 this.gravity_Y = 0;
                 this.acceleration = 0.1;
@@ -140,7 +139,9 @@ class MovableObject {
     checkKeyboard() {
         return this.world.keyboard.DOWN || this.world.keyboard.UP || this.world.keyboard.LEFT || this.world.keyboard.RIGHT == true
     }
-
+    checkPosition() {
+        return this.x
+    }
 
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height)

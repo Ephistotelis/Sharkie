@@ -8,7 +8,6 @@ class World {
     score = 0;
     spawntimer = 1000;
     spawnedBoss = false;
-
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -18,6 +17,59 @@ class World {
         this.countScore();
         this.setWorld();
         this.spawnBoss();
+        this.spawnEnemyProgress();
+        this.despawnEnemies()
+            //this.speedGameProgress();          disabled for NOW
+    }
+
+
+    despawnEnemies() {
+        setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+                if (enemy.checkPosition() < -100) {
+                    console.log(enemy, 'out of canvas')
+                    this.level.enemies.splice(enemy, 1)
+                }
+
+            })
+        }, 1000);
+
+    }
+
+
+    spawnEnemyProgress() {
+        setInterval(() => {
+            if (this.score > 500 && this.score < 1500) {
+                this.level.enemies.push(new Pufferfish(1000))
+            }
+            if (this.score > 1000 && this.score < 2000) {
+                this.level.enemies.push(new Endboss(1000))
+            }
+        }, 2000);
+    }
+
+
+    spawnEnemies() {
+        setInterval(() => {
+            this.level.enemies.push(new Pufferfish(1000))
+        }, 2000);
+    }
+
+
+    spawnBoss() {
+        setInterval(() => {
+            if (this.score > 300 && this.score < 500) {
+                console.log(world)
+                this.level.endboss.push(new Endboss(760, 20))
+                this.spawnedBoss = true;
+            }
+            if (this.score > 800 && this.score < 1000) {
+                console.log(world)
+                this.level.endboss.push(new Endboss(760, 100))
+                this.spawnedBoss = true;
+            }
+        }, 1000);
+
     }
 
 
@@ -25,16 +77,16 @@ class World {
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.checkCollision(enemy)) {
-                    console.log('hit by', enemy) //                                                                                                               consollog
+                    // console.log('hit by', enemy) //                                                                                                               consollog
                     this.character.decreaseHealth();
                 }
             })
             this.level.endboss.forEach((enemy) => {
                 if (this.character.checkCollision(enemy)) {
-                    console.log('hit by', enemy) //                                                                                                               consollog
+                    // console.log('hit by', enemy) //                                                                                                               consollog
                     this.character.decreaseHealth();
                     enemy.decreaseHealth();
-                    console.log(enemy.health);
+                    //  console.log(enemy.health);
                 }
             })
         }, 100);
@@ -65,21 +117,6 @@ class World {
     }
 
 
-    spawnBoss() {
-        setInterval(() => {
-            if (this.score > 300 && this.score < 500) {
-                console.log(world)
-                this.level.endboss.push(new Endboss(760, 20))
-                this.spawnedBoss = true;
-            }
-            if (this.score > 800 && this.score < 1000) {
-                console.log(world)
-                this.level.endboss.push(new Endboss(760, 100))
-                this.spawnedBoss = true;
-            }
-        }, 1000);
-
-    }
 
     addObjectsToMap(objects) {
         objects.forEach(o => {
@@ -104,18 +141,28 @@ class World {
         }, 1000);
     }
 
-    // für el pollo loco, mit umdrehen, bei sharky kein umdrehen :)
-    /* addToMap(mo) {                                   
-        if (mo.mirrored) {
-            this.ctx.save();
-            this.ctx.translate(mo.width, 0);
-            this.ctx.scale(-1, 1)
-            mo.x = mo.x * -1
+
+    speedGameProgress() {
+            setInterval(() => {
+                this.level.backgroundObjectsAll.forEach((bg) => {
+                    if (bg.speed < 6) {
+                        bg.speed += 0.001
+                    }
+                })
+            }, 1000 / 60);
         }
-        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height)
-        if (mo.mirrored) {
-            mo.x = mo.x * -1
-            this.ctx.restore()
-        }
-    } */
+        // für el pollo loco, mit umdrehen, bei sharky kein umdrehen :)
+        /* addToMap(mo) {                                   
+            if (mo.mirrored) {
+                this.ctx.save();
+                this.ctx.translate(mo.width, 0);
+                this.ctx.scale(-1, 1)
+                mo.x = mo.x * -1
+            }
+            this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height)
+            if (mo.mirrored) {
+                mo.x = mo.x * -1
+                this.ctx.restore()
+            }
+        } */
 }
