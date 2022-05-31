@@ -3,8 +3,7 @@ const level1 = new Level(
         new Pufferfish(),
         new Pufferfish(),
         new Pufferfish(),
-        new Endboss()
-    ], [
+    ], [], [
         new Barrier()
     ], [
         // fürs erste ohne moving background, später mit moving background und die grafix bugs fixen

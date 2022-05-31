@@ -8,11 +8,11 @@ class MovableObject {
     speedMultiplier = 1; //to add slow or speed buffs, when collected gain a better or worse multiplier     exp: speed multi = 1.3; slow multi = 0.4;
     imageCache = {};
     mirrored = false;
-    world;
     gravity_Y = 0.5;
     acceleration = 0.1;
     falling = false;
     health = 100;
+    lasthit = 0;
     // this.world.camera_x = -this.x;
 
     loadImage(path) {
@@ -27,6 +27,13 @@ class MovableObject {
             img.src = path;
             this.imageCache[path] = img;
         })
+    }
+
+    loadImagesALL(arr) {
+        arr.forEach((array) => {
+            this.loadImages(array)
+        })
+
     }
 
     animate(animation) {
@@ -109,6 +116,7 @@ class MovableObject {
 
     applyGravity() {
         setInterval(() => {
+
             if (this.checkKeyboard()) {
                 this.gravity_Y = 0;
                 this.acceleration = 0.1;
@@ -129,13 +137,8 @@ class MovableObject {
         return this.y < 370;
     }
 
-
     checkKeyboard() {
-        if (this.world.keyboard.DOWN || this.world.keyboard.UP || this.world.keyboard.LEFT || this.world.keyboard.RIGHT === true) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.world.keyboard.DOWN || this.world.keyboard.UP || this.world.keyboard.LEFT || this.world.keyboard.RIGHT == true
     }
 
 
@@ -155,7 +158,26 @@ class MovableObject {
 
     }
 
+
     checkCollision(mo) {
         return this.x + this.width > mo.x && this.y + this.height > mo.y && this.x < mo.x && this.y < mo.y + mo.height;
+    }
+
+
+    decreaseHealth() {
+        if (this.health > 0) {
+            this.health -= 5;
+            this.lasthit = new Date().getTime()
+        }
+    }
+
+    isHurt() {
+        let sincelasthit = new Date().getTime() - this.lasthit;
+        sincelasthit = sincelasthit / 1000;
+        return sincelasthit < 1;
+    }
+
+    isDead() {
+        return this.health < 1;
     }
 }

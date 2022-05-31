@@ -25,35 +25,76 @@ class Character extends MovableObject {
         'img/1.Sharkie/1.IDLE/5.png',
         'img/1.Sharkie/1.IDLE/4.png',
     ];
+    IMAGES_DEAD = [
+        'img/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00000.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00001.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00002.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00003.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00004.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00005.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00006.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00007.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00008.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00009.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00010.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/sin subir/DES 2_00011.png',
+    ];
+    IMAGES_HURT = [
+        'img/1.Sharkie/5.Hurt/1.Poisoned/1.png',
+        'img/1.Sharkie/5.Hurt/1.Poisoned/2.png',
+        'img/1.Sharkie/5.Hurt/1.Poisoned/3.png',
+        'img/1.Sharkie/5.Hurt/1.Poisoned/4.png',
+    ];
+
+    IMAGES_ALL = [
+        this.IMAGES_SWIMMING,
+        this.IMAGES_GRAVITY,
+        this.IMAGES_DEAD,
+        this.IMAGES_HURT
+    ];
+
     currentImage = 0;
     world;
     speed = 3;
     y = 100;
+    health = 200;
+
+
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png')
-        this.loadImages(this.IMAGES_SWIMMING);
-        this.loadImages(this.IMAGES_GRAVITY);
+        this.loadImagesALL(this.IMAGES_ALL)
         this.animate(this.IMAGES_SWIMMING);
         this.move();
         this.applyGravity();
 
     }
+
+
     move() {
         this.moveRight();
         this.moveLeft(); //swimming backwards causes the skark to swim slower
         this.moveUp();
         this.moveDown();
     }
+
+
     animate(animation) {
         setInterval(() => {
-            if (this.isAboveGround() && this.falling == true) {
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGES_DEAD)
+            } else if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT)
+            } else if (this.isAboveGround() && this.falling == true) {
                 this.playAnimation(this.IMAGES_GRAVITY)
             } else {
                 this.playAnimation(animation)
             }
         }, 1000 / 10)
-
     }
+
+
+
+
     jump() {
 
     }
