@@ -3,12 +3,12 @@ class Level {
     barriers;
     backgroundObjectsAll;
     endboss;
-
-    constructor(enemies, endboss, barriers, backgroundObjectsAll) {
+    statusbars;
+    constructor(enemies, endboss, barriers, backgroundObjectsAll, statusbars) {
         this.enemies = enemies;
         this.endboss = endboss;
         this.barriers = barriers;
         this.backgroundObjectsAll = backgroundObjectsAll;
-
+        this.statusbars = statusbars;
     }
 }

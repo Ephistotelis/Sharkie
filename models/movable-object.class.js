@@ -13,6 +13,7 @@ class MovableObject {
     falling = false;
     health = 100;
     lasthit = 0;
+    world;
     // this.world.camera_x = -this.x;
 
     loadImage(path) {
@@ -149,7 +150,7 @@ class MovableObject {
 
 
     drawHitbox(ctx) {
-        if (this instanceof Character || this instanceof Pufferfish || this instanceof Endboss) {
+        if (this instanceof Character || this instanceof Pufferfish || this instanceof Endboss || this instanceof Jellyfish) {
             ctx.beginPath();
             ctx.lineWidth = '3';
             ctx.strokeStyle = 'blue'

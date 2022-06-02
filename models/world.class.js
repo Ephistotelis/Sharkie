@@ -38,10 +38,20 @@ class World {
     spawnEnemyProgress() {
         setInterval(() => {
             if (this.score > 500 && this.score < 1500) {
-                this.level.enemies.push(new Pufferfish(1000))
+                this.level.enemies.push(new Pufferfish_easy(1000))
+                this.level.enemies.push(new Jellyfish_easy(1000))
+                this.level.enemies.push(new Jellyfish_medium(1000))
+                this.level.enemies.push(new Jellyfish_hard(1000))
+                this.level.enemies.push(new Jellyfish_veryhard(1000))
             }
             if (this.score > 1000 && this.score < 2000) {
                 this.level.enemies.push(new Endboss(1000))
+            }
+            if (this.score > 2000 && this.score < 3000) {
+                this.level.enemies.push(new Pufferfish_medium(1000))
+            }
+            if (this.score > 2500 && this.score < 3500) {
+                this.level.enemies.push(new Pufferfish_hard(1000))
             }
         }, 2000);
     }
@@ -94,7 +104,6 @@ class World {
 
     setWorld() {
         this.character.world = this;
-
     }
 
 
@@ -105,6 +114,7 @@ class World {
         this.addObjectsToMap(this.level.barriers)
         this.addObjectsToMap(this.level.enemies)
         this.addObjectsToMap(this.level.endboss)
+        this.addStatusBarsToMap(this.level.statusbars)
         this.addToMap(this.character)
 
         // draw wird immer wieder aufgerufen
@@ -114,7 +124,14 @@ class World {
         });
     }
 
-
+    addStatusBarsToMap(objects) {
+        objects.forEach(o => {
+            this.addBarToMap(o)
+        })
+    }
+    addBarToMap(bar) {
+        bar.draw(this.ctx);
+    }
 
     addObjectsToMap(objects) {
         objects.forEach(o => {

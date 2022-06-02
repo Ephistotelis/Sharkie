@@ -1,8 +1,8 @@
 const level1 = new Level(
     [
-        new Pufferfish(750),
-        new Pufferfish(850),
-        new Pufferfish(950),
+        new Pufferfish_easy(750),
+        new Pufferfish_easy(850),
+        new Pufferfish_easy(950),
     ], [], [
         new Barrier()
     ], [
@@ -20,5 +20,9 @@ const level1 = new Level(
         new Background('img/3. Background/Layers/3.Fondo 1/D2.png', 719),
         new Background('img/3. Background/Layers/1. Light/2.png', 719),
         new Background('img/3. Background/Layers/2. Floor/D2.png', 719), */
+    ], [
+        new StatusBar_Health(),
+        new StatusBar_Poison(),
+        new StatusBar_Coin(),
     ]
 );
