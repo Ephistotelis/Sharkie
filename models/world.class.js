@@ -87,6 +87,7 @@ class World {
                 if (this.character.checkCollision(enemy)) {
                     // console.log('hit by', enemy) //                                                                                                               consollog
                     this.character.decreaseHealth();
+                    enemy.decreaseHealth();
                 }
             })
             this.level.endboss.forEach((enemy) => {
@@ -97,7 +98,7 @@ class World {
                     //  console.log(enemy.health);
                 }
             })
-        }, 100);
+        }, 10);
 
     }
 
@@ -124,6 +125,7 @@ class World {
         });
     }
 
+
     addStatusBarsToMap(objects) {
         objects.forEach(o => {
             this.addBarToMap(o)
@@ -149,6 +151,7 @@ class World {
         setInterval(() => {
             if (!this.character.isDead()) {
                 this.score += 100;
+                this.level.statusbars[3].score = this.score;
                 console.log(this.score)
             } else {
                 return

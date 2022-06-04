@@ -11,7 +11,7 @@ class MovableObject {
     gravity_Y = 0.5;
     acceleration = 0.1;
     falling = false;
-    health = 100;
+    health = 5;
     lasthit = 0;
     world;
     // this.world.camera_x = -this.x;
@@ -162,7 +162,7 @@ class MovableObject {
 
 
     checkCollision(mo) {
-        return this.x + this.width > mo.x && this.y + this.height > mo.y && this.x < mo.x && this.y < mo.y + mo.height;
+        return this.x + this.width > mo.x && this.y + this.height > mo.y && this.x < mo.x + this.width && this.y < mo.y + mo.height;
     }
 
 

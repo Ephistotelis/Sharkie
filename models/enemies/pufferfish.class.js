@@ -5,4 +5,16 @@ class Pufferfish extends MovableObject {
     currentImage = 0;
     speed = 2;
 
+
+
+
+    animate(animation) {
+        setInterval(() => {
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGES_DEAD)
+            } else {
+                this.playAnimation(animation)
+            }
+        }, 1000 / 10)
+    }
 }

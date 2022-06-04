@@ -9,5 +9,4 @@ class Background extends BackgroundObject {
         this.x = x;
         this.flowLeft();
     }
-
 }
