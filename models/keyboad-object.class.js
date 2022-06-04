@@ -6,7 +6,7 @@ class KeyboardObject {
     DOWN = false;
     SPACE = false;
     // Actions
-    LEFT_MOUSE = false;
+    ATTACK = false;
     SLOT_1 = false;
     SLOT_2 = false;
 }

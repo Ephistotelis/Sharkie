@@ -4,7 +4,7 @@ class Pufferfish extends MovableObject {
 
     currentImage = 0;
     speed = 2;
-
+    health = 20;
 
 
 

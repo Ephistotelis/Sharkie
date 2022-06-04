@@ -12,12 +12,16 @@ function init() {
 
 
 }
-
+/* document.addEventListener('click', (event) => {
+    if (event.pointerId == 1) {
+        keyboard.ATTACK = true;
+    }
+}) */
 document.addEventListener('keydown', (event) => {
-    //                                                                                                                              multi consollogs
-    //console.log(event)
-    //console.log(event['code'])
-    // console.log(event['keyCode'])
+    //multi consollogs
+    /* console.log(event)
+    console.log(event['code'])
+    console.log(event['keyCode']) */
 
     if (event.keyCode == 38 || event.keyCode == 87) {
         keyboard.UP = true;
@@ -34,6 +38,9 @@ document.addEventListener('keydown', (event) => {
     if (event.keyCode == 37 || event.keyCode == 65) {
         keyboard.LEFT = true;
         // console.log(keyboard.LEFT)
+    }
+    if (event.keyCode == 32) {
+        keyboard.ATTACK = true;
     }
     // console.log('--------------')
 })
@@ -59,6 +66,9 @@ document.addEventListener('keyup', (event) => {
     if (event.keyCode == 37 || event.keyCode == 65) {
         keyboard.LEFT = false;
         // console.log(keyboard.LEFT)
+    }
+    if (event.keyCode == 32) {
+        keyboard.ATTACK = false;
     }
     // console.log('--------------')
 })

@@ -14,10 +14,11 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.checkCollisions();
+        this.checkCollisionsAttack();
         this.countScore();
         this.setWorld();
         this.spawnBoss();
-        this.spawnEnemyProgress();
+        //this.spawnEnemyProgress();
         this.despawnEnemies()
             //this.speedGameProgress();          disabled for NOW
     }
@@ -35,7 +36,7 @@ class World {
     }
 
 
-    spawnEnemyProgress() {
+    /* spawnEnemyProgress() {
         setInterval(() => {
             if (this.score > 500 && this.score < 1500) {
                 this.level.enemies.push(new Pufferfish_easy(1000))
@@ -54,7 +55,7 @@ class World {
                 this.level.enemies.push(new Pufferfish_hard(1000))
             }
         }, 2000);
-    }
+    } */
 
 
     spawnEnemies() {
@@ -73,7 +74,7 @@ class World {
             }
             if (this.score > 800 && this.score < 1000) {
                 console.log(world)
-                this.level.endboss.push(new Endboss(760, 100))
+                this.level.endboss.push(new Endboss(760, 300))
                 this.spawnedBoss = true;
             }
         }, 1000);
@@ -86,20 +87,54 @@ class World {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.checkCollision(enemy)) {
                     // console.log('hit by', enemy) //                                                                                                               consollog
-                    this.character.decreaseHealth();
-                    enemy.decreaseHealth();
+                    this.character.decreaseHealth(enemy);
+                    enemy.decreaseHealth(this.character);
+                    // console.log("Character health:", this.character.health); //                                                                                  consollog
+                    // console.log("Enemy health", enemy.health); //                                                                                                   consollog
                 }
             })
             this.level.endboss.forEach((enemy) => {
                 if (this.character.checkCollision(enemy)) {
                     // console.log('hit by', enemy) //                                                                                                               consollog
-                    this.character.decreaseHealth();
-                    enemy.decreaseHealth();
-                    //  console.log(enemy.health);
+                    this.character.decreaseHealth(enemy);
+                    enemy.decreaseHealth(this.character);
+                    // console.log("Character health:", this.character.health); //                                                                                  consollog
+                    // console.log("Enemy health", enemy.health); //                                                                                                  consollog
                 }
             })
         }, 10);
 
+    }
+
+    checkCollisionsAttack() {
+        setInterval(() => {
+            if (this.level.attackObject.length > 0) {
+                this.level.enemies.forEach((enemy) => {
+                    for (let i = 0; i < this.level.attackObject.length; i++) {
+                        if (this.level.attackObject[i].checkCollision(enemy)) {
+                            // console.log('hit by', enemy) //                                                                                                               consollog
+                            enemy.decreaseHealth(this.level.attackObject[i]);
+                            this.level.attackObject.splice(this.level.attackObject[i], 1)
+                            console.log("Character health:", this.character.health); //                                                                                  consollog
+                            console.log("Enemy health", enemy.health); //                                                                                                   consollog
+                        }
+                    }
+                });
+                this.level.endboss.forEach((enemy) => {
+                    for (let i = 0; i < this.level.attackObject.length; i++) {
+                        if (this.level.attackObject[i].checkCollision(enemy)) {
+                            // console.log('hit by', enemy) //                                                                                                               consollog
+                            enemy.decreaseHealth(this.level.attackObject[i]);
+                            this.level.attackObject.splice(this.level.attackObject[i], 1)
+                                // console.log("Character health:", this.character.health); //                                                                                  consollog
+                            console.log("Enemy health", enemy.health); //                                                                                                  consollog
+                        }
+                    }
+                })
+
+            }
+
+        }, 10);
     }
 
 
@@ -115,6 +150,7 @@ class World {
         this.addObjectsToMap(this.level.barriers)
         this.addObjectsToMap(this.level.enemies)
         this.addObjectsToMap(this.level.endboss)
+        this.addObjectsToMap(this.level.attackObject)
         this.addStatusBarsToMap(this.level.statusbars)
         this.addToMap(this.character)
 
@@ -152,7 +188,7 @@ class World {
             if (!this.character.isDead()) {
                 this.score += 100;
                 this.level.statusbars[3].score = this.score;
-                console.log(this.score)
+                //console.log(this.score)
             } else {
                 return
             }
@@ -161,26 +197,13 @@ class World {
 
 
     speedGameProgress() {
-            setInterval(() => {
-                this.level.backgroundObjectsAll.forEach((bg) => {
-                    if (bg.speed < 6) {
-                        bg.speed += 0.001
-                    }
-                })
-            }, 1000 / 60);
-        }
-        // für el pollo loco, mit umdrehen, bei sharky kein umdrehen :)
-        /* addToMap(mo) {                                   
-            if (mo.mirrored) {
-                this.ctx.save();
-                this.ctx.translate(mo.width, 0);
-                this.ctx.scale(-1, 1)
-                mo.x = mo.x * -1
-            }
-            this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height)
-            if (mo.mirrored) {
-                mo.x = mo.x * -1
-                this.ctx.restore()
-            }
-        } */
+        setInterval(() => {
+            this.level.backgroundObjectsAll.forEach((bg) => {
+                if (bg.speed < 6) {
+                    bg.speed += 0.001
+                }
+            })
+        }, 1000 / 60);
+    }
+
 }

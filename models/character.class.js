@@ -45,12 +45,23 @@ class Character extends MovableObject {
         'img/1.Sharkie/5.Hurt/1.Poisoned/3.png',
         'img/1.Sharkie/5.Hurt/1.Poisoned/4.png',
     ];
+    IMAGES_ATTACK_BUBBLE = [
+        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/4.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/5.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/6.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png',
+    ]
 
     IMAGES_ALL = [
         this.IMAGES_SWIMMING,
         this.IMAGES_GRAVITY,
         this.IMAGES_DEAD,
-        this.IMAGES_HURT
+        this.IMAGES_HURT,
+        this.IMAGES_ATTACK_BUBBLE
     ];
 
     currentImage = 0;
@@ -58,15 +69,15 @@ class Character extends MovableObject {
     speed = 3;
     y = 100;
     health = 20000;
-
-
+    coolDown = false;
+    attack_damage = 10;
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png')
         this.loadImagesALL(this.IMAGES_ALL)
         this.animate(this.IMAGES_SWIMMING);
         this.move();
         this.applyGravity();
-
+        this.attack_bubble()
     }
 
 
@@ -84,6 +95,9 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_DEAD)
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT)
+            } else if (this.attacked()) {
+                this.playAnimation(this.IMAGES_ATTACK_BUBBLE)
+
             } else if (this.isAboveGround() && this.falling == true) {
                 this.playAnimation(this.IMAGES_GRAVITY)
             } else {
@@ -93,9 +107,26 @@ class Character extends MovableObject {
     }
 
 
+    attack_bubble() {
 
+        setInterval(() => {
+            if (this.world.keyboard.ATTACK) {
+                if (this.coolDown == false && this.used_attack == false) {
+                    this.coolDown = true;
+                    this.used_attack = true;
+                    console.log('attacked') //                                                                                           consollog
+                    this.world.level.attackObject.push(new Attack_Bubble(this.world))
+                    setTimeout(() => {
+                        this.coolDown = false;
+                    }, 2000);
+                    setTimeout(() => {
+                        this.used_attack = false;
 
-    jump() {
+                    }, 650);
+                    this.currentImage = 0;
+                }
+            }
+        }, 50);
 
     }
 }

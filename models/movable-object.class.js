@@ -14,6 +14,9 @@ class MovableObject {
     health = 5;
     lasthit = 0;
     world;
+    used_attack = false;
+    speedY = 0;
+    attack_damage = 5;
     // this.world.camera_x = -this.x;
 
     loadImage(path) {
@@ -50,6 +53,16 @@ class MovableObject {
         let path = animation[i];
         this.img = this.imageCache[path];
         this.currentImage++
+    }
+
+
+    playAnimationAttack(animation) {
+        let i = this.currentImage % animation.length; // let i = 0 % 6; %=modolu, rest.       => 0, Rest 0
+        // i = 0,1,2,3,4,5,6,0
+        let path = animation[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+        this.used_attack = false;
     }
 
 
@@ -166,9 +179,9 @@ class MovableObject {
     }
 
 
-    decreaseHealth() {
+    decreaseHealth(enemy) {
         if (this.health > 0) {
-            this.health -= 5;
+            this.health -= enemy.attack_damage;
             this.lasthit = new Date().getTime()
         }
     }
@@ -183,6 +196,9 @@ class MovableObject {
         return this.health < 1;
     }
 
+    attacked() {
+        return this.used_attack
+    }
     randomNumber(min, max) {
         return Math.random() * (max - min) + min;
     }
