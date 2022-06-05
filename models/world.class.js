@@ -18,7 +18,7 @@ class World {
         this.countScore();
         this.setWorld();
         //this.spawnBoss();
-        //this.spawnEnemyProgress();
+        this.spawnEnemyProgress();
         this.spawnEnemies()
         this.despawnEnemies()
         this.despawnEnemiesWhenDead()
@@ -33,7 +33,6 @@ class World {
                 if (enemy.checkPosition() < -100) {
                     //console.log("before:", enemy, 'out of canvas')
                     this.level.enemies.splice(index, 1)
-                    return
                 }
             })
         }, 100);
@@ -44,7 +43,7 @@ class World {
             this.level.enemies.forEach((enemy, index) => {
                 if (enemy.isDead()) {
                     this.level.enemies.splice(index, 1)
-                    console.log(this.level.enemies)
+                        //console.log(this.level.enemies)
                         //console.log('enemy dead:', enemy)
                 }
             })
@@ -62,7 +61,7 @@ class World {
                     //this.level.enemies.push(new Jellyfish_veryhard(1000))
             }
             if (this.score > 1000 && this.score < 2000) {
-                this.level.enemies.push(new Endboss(1000))
+                this.level.enemies.push(new Jellyfish_easy(1000))
             }
             if (this.score > 2000 && this.score < 3000) {
                 this.level.enemies.push(new Pufferfish_medium(1000))
@@ -105,7 +104,7 @@ class World {
                     // console.log('hit by', enemy) //                                                                                                               consollog
                     this.character.decreaseHealth(enemy);
                     enemy.decreaseHealth(this.character);
-                    // console.log("Character health:", this.character.health); //                                                                                  consollog
+                    //  console.log("Character health:", this.character.health); //                                                                                  consollog
                     // console.log("Enemy health", enemy.health); //                                                                                                   consollog
                 }
             })
@@ -118,7 +117,7 @@ class World {
                     // console.log("Enemy health", enemy.health); //                                                                                                  consollog
                 }
             })
-        }, 10);
+        }, 100);
 
     }
 

@@ -18,11 +18,17 @@ class Jellyfish_medium extends Jellyfish {
         this.IMAGES_SWIMMING,
         this.IMAGES_DEAD
     ]
+
+    //BattleStats
+    health = 100;
+    attack_damage = 16;
     constructor(spawnpoint) {
         super().loadImage('img/2.Enemy/2 Jelly fish/Regular damage/Yellow 1.png')
         this.x = spawnpoint;
         this.loadImagesALL(this.IMAGES_ALL)
         this.animate(this.IMAGES_SWIMMING)
         this.flowLeft()
+        this.setStats()
+        this.sinusoidalWaveMovementY()
     }
 }

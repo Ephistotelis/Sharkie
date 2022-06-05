@@ -14,9 +14,16 @@ class MovableObject {
     health = 5;
     lasthit = 0;
     world;
-    used_attack = false;
-    speedY = 0;
+    used_attack_Bubble = false;
+    used_attack_FinSLap = false;
+    speedY = 2;
     attack_damage = 5;
+
+    immortal = false;
+    //Movement
+    angle;
+    anglespeed;
+    curve;
     // this.world.camera_x = -this.x;
 
     loadImage(path) {
@@ -62,7 +69,7 @@ class MovableObject {
         let path = animation[i];
         this.img = this.imageCache[path];
         this.currentImage++;
-        this.used_attack = false;
+        this.used_attack_Bubble = false;
     }
 
 
@@ -120,11 +127,36 @@ class MovableObject {
 
 
     flowLeft() {
-        this.speed = this.randomNumber(1, 5)
+
         setInterval(() => {
             this.x -= this.speed;
 
         }, 1000 / 60);
+    }
+
+
+    sinusoidalWaveMovementY() {
+        setInterval(() => {
+            this.y += 2 * Math.sin(this.angle)
+            this.angle += this.anglespeed;
+        }, 100);
+
+    }
+
+    sinusoidalWaveMovementX() {
+        setInterval(() => {
+            this.x += 2 * Math.sin(this.angle)
+            this.angle += this.anglespeed;
+        }, 100);
+
+    }
+
+    setStats() {
+
+        this.angle = 0;
+        this.anglespeed = Math.random() * 0.9;
+        this.curve = Math.random() * 5;
+        this.speed = this.randomNumber(1, 3)
     }
 
 
@@ -196,8 +228,12 @@ class MovableObject {
         return this.health < 1;
     }
 
-    attacked() {
-        return this.used_attack;
+    attackedBubble() {
+        return this.used_attack_Bubble;
+    }
+
+    attackedFinSlap() {
+        return this.used_attack_FinSLap
     }
     randomNumber(min, max) {
         return Math.random() * (max - min) + min;

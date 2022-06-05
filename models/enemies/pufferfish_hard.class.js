@@ -16,11 +16,19 @@ class Pufferfish_hard extends Pufferfish {
         this.IMAGES_SWIMMING,
         this.IMAGES_DEAD
     ]
+
+    //BattleStats
+    health = 40;
+    attack_damage = 7;
+
+
     constructor(spawnpoint) {
         super().loadImage('img/2.Enemy/2 Jelly fish/Súper dangerous/Green 1.png')
         this.x = spawnpoint;
         this.loadImagesALL(this.IMAGES_ALL)
         this.animate(this.IMAGES_SWIMMING)
         this.flowLeft()
+        this.setStats()
+        this.sinusoidalWaveMovementY()
     }
 }

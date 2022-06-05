@@ -12,16 +12,21 @@ class Pufferfish_easy extends Pufferfish {
         'img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/1.Dead 3 (can animate by going down to the floor after the Fin Slap attack).png',
     ];
     IMAGES_ALL = [
-        this.IMAGES_SWIMMING,
-        this.IMAGES_DEAD
-    ]
+            this.IMAGES_SWIMMING,
+            this.IMAGES_DEAD
+        ]
+        //BattleStats
     health = 10;
     attack_damage = 2;
+
+
     constructor(spawnpoint) {
         super().loadImage('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png')
         this.x = spawnpoint;
+        this.setStats()
         this.loadImagesALL(this.IMAGES_ALL)
         this.animate(this.IMAGES_SWIMMING)
-        this.flowLeft()
+        this.flowLeft();
+        this.sinusoidalWaveMovementY()
     }
 }

@@ -10,4 +10,8 @@ class AttackObject extends MovableObject {
         }, 1000 / 60);
 
     }
+
+    finSlap() {
+
+    }
 }

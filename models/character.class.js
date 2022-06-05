@@ -96,7 +96,7 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_DEAD)
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT)
-            } else if (this.attacked()) {
+            } else if (this.attackedBubble()) {
                 this.playAnimation(this.IMAGES_ATTACK_BUBBLE)
             } else if (this.isAboveGround() && this.falling == true) {
                 this.playAnimation(this.IMAGES_GRAVITY)
@@ -116,10 +116,10 @@ class Character extends MovableObject {
                     this.world.level.attackObject.push(new Attack_Bubble(this.world))
                 }, 700);
                 this.coolDownAttack += 5;
-                this.used_attack = true;
+                this.used_attack_Bubble = true;
                 this.currentImage = 0;
                 setTimeout(() => {
-                    this.used_attack = false;
+                    this.used_attack_Bubble = false;
                 }, 700);
             }
         }, 50);
@@ -132,7 +132,7 @@ class Character extends MovableObject {
             if (this.coolDownAttack > 0) {
                 this.world.level.statusbars[4].cooldown = this.coolDownAttack;
                 this.coolDownAttack -= 1;
-                console.log('Cooldown:', this.coolDownAttack) //                                                                     consollog
+                // console.log('Cooldown:', this.coolDownAttack) //                                                                     consollog
             } else {
                 this.world.level.statusbars[4].cooldown = this.coolDownAttack;
             }

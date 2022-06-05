@@ -3,10 +3,10 @@ class Pufferfish extends MovableObject {
     y = this.randomNumber(50, 350);
 
     currentImage = 0;
-    speed = 2;
+    speed = 5;
     health = 20;
 
-
+    speedY = 1;
     animate(animation) {
         setInterval(() => {
             if (this.isDead()) {
@@ -16,4 +16,8 @@ class Pufferfish extends MovableObject {
             }
         }, 1000 / 10)
     }
+
+
+
+
 }

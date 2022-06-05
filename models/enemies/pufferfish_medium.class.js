@@ -15,11 +15,17 @@ class Pufferfish_medium extends Pufferfish {
         this.IMAGES_SWIMMING,
         this.IMAGES_DEAD
     ]
+
+    //BattleStats
+    health = 20;
+    attack_damage = 4;
     constructor(spawnpoint) {
         super().loadImage('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim1.png')
         this.x = spawnpoint;
+        this.setStats()
         this.loadImagesALL(this.IMAGES_ALL)
         this.animate(this.IMAGES_SWIMMING)
         this.flowLeft()
+        this.sinusoidalWaveMovementY()
     }
 }
