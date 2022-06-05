@@ -69,7 +69,7 @@ class Character extends MovableObject {
     speed = 3;
     y = 100;
     health = 20000;
-    coolDown = false;
+    coolDownAttack = 0;
     attack_damage = 10;
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png')
@@ -77,7 +77,8 @@ class Character extends MovableObject {
         this.animate(this.IMAGES_SWIMMING);
         this.move();
         this.applyGravity();
-        this.attack_bubble()
+        this.attack_bubble();
+        this.decreaseCoolDownOverTime();
     }
 
 
@@ -97,7 +98,6 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_HURT)
             } else if (this.attacked()) {
                 this.playAnimation(this.IMAGES_ATTACK_BUBBLE)
-
             } else if (this.isAboveGround() && this.falling == true) {
                 this.playAnimation(this.IMAGES_GRAVITY)
             } else {
@@ -108,25 +108,35 @@ class Character extends MovableObject {
 
 
     attack_bubble() {
-
         setInterval(() => {
-            if (this.world.keyboard.ATTACK) {
-                if (this.coolDown == false && this.used_attack == false) {
-                    this.coolDown = true;
-                    this.used_attack = true;
-                    console.log('attacked') //                                                                                           consollog
-                    this.world.level.attackObject.push(new Attack_Bubble(this.world))
-                    setTimeout(() => {
-                        this.coolDown = false;
-                    }, 2000);
-                    setTimeout(() => {
-                        this.used_attack = false;
+            if (this.world.keyboard.ATTACK && this.coolDownAttack < 1) {
 
-                    }, 650);
-                    this.currentImage = 0;
-                }
+                console.log('attacked') //         
+                setTimeout(() => {
+                    this.world.level.attackObject.push(new Attack_Bubble(this.world))
+                }, 700);
+                this.coolDownAttack += 5;
+                this.used_attack = true;
+                this.currentImage = 0;
+                setTimeout(() => {
+                    this.used_attack = false;
+                }, 700);
             }
         }, 50);
+    }
 
+
+    decreaseCoolDownOverTime() {
+        setInterval(() => {
+
+            if (this.coolDownAttack > 0) {
+                this.world.level.statusbars[4].cooldown = this.coolDownAttack;
+                this.coolDownAttack -= 1;
+                console.log('Cooldown:', this.coolDownAttack) //                                                                     consollog
+            } else {
+                this.world.level.statusbars[4].cooldown = this.coolDownAttack;
+            }
+
+        }, 1000);
     }
 }

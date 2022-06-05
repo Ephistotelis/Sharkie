@@ -7,7 +7,6 @@ class Pufferfish extends MovableObject {
     health = 20;
 
 
-
     animate(animation) {
         setInterval(() => {
             if (this.isDead()) {

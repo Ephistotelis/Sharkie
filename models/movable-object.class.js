@@ -197,9 +197,10 @@ class MovableObject {
     }
 
     attacked() {
-        return this.used_attack
+        return this.used_attack;
     }
     randomNumber(min, max) {
         return Math.random() * (max - min) + min;
     }
+
 }

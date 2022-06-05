@@ -7,10 +7,11 @@ class Jellyfish_veryhard extends Jellyfish {
 
     ];
     IMAGES_DEAD = [
-        'img/2.Enemy/2 Jelly fish/Dead/Yellow/y1.png',
-        'img/2.Enemy/2 Jelly fish/Dead/Yellow/y2.png',
-        'img/2.Enemy/2 Jelly fish/Dead/Yellow/y3.png',
-        'img/2.Enemy/2 Jelly fish/Dead/Yellow/y4.png',
+        'img/2.Enemy/2 Jelly fish/Dead/Pink/P1.png',
+        'img/2.Enemy/2 Jelly fish/Dead/Pink/P2.png',
+        'img/2.Enemy/2 Jelly fish/Dead/Pink/P3.png',
+        'img/2.Enemy/2 Jelly fish/Dead/Pink/P4.png',
+
 
     ];
     IMAGES_ALL = [

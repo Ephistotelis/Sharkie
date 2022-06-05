@@ -1,10 +1,10 @@
-class StatusBar_Score extends StatusBar {
+class StatusBar_Cooldown extends StatusBar {
     width = 40;
     height = 40;
-    score = 0;
+    cooldown = 0;
     draw(ctx) {
         ctx.font = '32px serif';
         ctx.fillStyle = "red";
-        ctx.fillText(`${this.score}`, 600, 50, 100);
+        ctx.fillText(`${this.cooldown}`, 650, 450, 100);
     }
 }

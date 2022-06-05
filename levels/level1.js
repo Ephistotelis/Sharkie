@@ -24,6 +24,7 @@ const level1 = new Level(
         new StatusBar_Health(),
         new StatusBar_Poison(),
         new StatusBar_Coin(),
-        new StatusBar_Score()
+        new StatusBar_Score(),
+        new StatusBar_Cooldown(),
     ]
 );

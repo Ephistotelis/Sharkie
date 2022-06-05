@@ -7,10 +7,11 @@ class Jellyfish_easy extends Jellyfish {
     ];
 
     IMAGES_DEAD = [
-        'img/2.Enemy/2 Jelly fish/Dead/green/g1.png',
-        'img/2.Enemy/2 Jelly fish/Dead/green/g2.png',
-        'img/2.Enemy/2 Jelly fish/Dead/green/g3.png',
-        'img/2.Enemy/2 Jelly fish/Dead/green/g4.png',
+        'img/2.Enemy/2 Jelly fish/Dead/Lila/L1.png',
+        'img/2.Enemy/2 Jelly fish/Dead/Lila/L2.png',
+        'img/2.Enemy/2 Jelly fish/Dead/Lila/L3.png',
+        'img/2.Enemy/2 Jelly fish/Dead/Lila/L4.png',
+
     ]
     IMAGES_ALL = [
         this.IMAGES_SWIMMING,

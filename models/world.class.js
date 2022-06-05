@@ -17,33 +17,49 @@ class World {
         this.checkCollisionsAttack();
         this.countScore();
         this.setWorld();
-        this.spawnBoss();
+        //this.spawnBoss();
         //this.spawnEnemyProgress();
+        this.spawnEnemies()
         this.despawnEnemies()
+        this.despawnEnemiesWhenDead()
             //this.speedGameProgress();          disabled for NOW
     }
 
 
     despawnEnemies() {
+
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
+            this.level.enemies.forEach((enemy, index) => {
                 if (enemy.checkPosition() < -100) {
-                    console.log(enemy, 'out of canvas')
-                    this.level.enemies.splice(enemy, 1)
+                    //console.log("before:", enemy, 'out of canvas')
+                    this.level.enemies.splice(index, 1)
+                    return
                 }
             })
-        }, 2000);
+        }, 100);
+    }
+
+    despawnEnemiesWhenDead() {
+        setInterval(() => {
+            this.level.enemies.forEach((enemy, index) => {
+                if (enemy.isDead()) {
+                    this.level.enemies.splice(index, 1)
+                    console.log(this.level.enemies)
+                        //console.log('enemy dead:', enemy)
+                }
+            })
+        }, 10);
     }
 
 
-    /* spawnEnemyProgress() {
+    spawnEnemyProgress() {
         setInterval(() => {
             if (this.score > 500 && this.score < 1500) {
                 this.level.enemies.push(new Pufferfish_easy(1000))
-                this.level.enemies.push(new Jellyfish_easy(1000))
-                this.level.enemies.push(new Jellyfish_medium(1000))
-                this.level.enemies.push(new Jellyfish_hard(1000))
-                this.level.enemies.push(new Jellyfish_veryhard(1000))
+                    //this.level.enemies.push(new Jellyfish_easy(1000))
+                    //this.level.enemies.push(new Jellyfish_medium(1000))
+                    //this.level.enemies.push(new Jellyfish_hard(1000))
+                    //this.level.enemies.push(new Jellyfish_veryhard(1000))
             }
             if (this.score > 1000 && this.score < 2000) {
                 this.level.enemies.push(new Endboss(1000))
@@ -55,12 +71,12 @@ class World {
                 this.level.enemies.push(new Pufferfish_hard(1000))
             }
         }, 2000);
-    } */
+    }
 
 
     spawnEnemies() {
         setInterval(() => {
-            this.level.enemies.push(new Pufferfish(1000))
+            this.level.enemies.push(new Pufferfish_easy(1000))
         }, 2000);
     }
 
@@ -105,6 +121,7 @@ class World {
         }, 10);
 
     }
+
 
     checkCollisionsAttack() {
         setInterval(() => {
