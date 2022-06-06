@@ -14,12 +14,12 @@ class BackgroundObject {
         setInterval(() => {
             this.setX();
             this.x -= this.speed;
-        }, 1000 / 60);
+        }, 50);
     }
 
     setX() {
-        if (this.x < -719) {
-            this.x = 719;
+        if (this.x < -1055) {
+            this.x = 1055;
         }
     }
     draw(ctx) {

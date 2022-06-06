@@ -78,7 +78,7 @@ class MovableObject {
         setInterval(() => {
             if (this.world.keyboard.RIGHT) {
                 this.mirrored = false;
-                if (this.x > 600) {
+                if (this.x > 930) {
                     return;
                 }
                 this.x += this.speed * this.speedMultiplier;
@@ -90,7 +90,7 @@ class MovableObject {
     moveLeft() {
         setInterval(() => {
             if (this.world.keyboard.LEFT) {
-                this.speedMultiplier = 0.3; // swimming backwards causes the shark to swim slower
+                this.speedMultiplier = 0.5; // swimming backwards causes the shark to swim slower
                 this.mirrored = true;
                 if (this.x < 0) {
                     return;
@@ -118,7 +118,7 @@ class MovableObject {
     moveDown() {
         setInterval(() => {
             if (this.world.keyboard.DOWN) {
-                if (this.y > 390) {
+                if (this.y > 600) {
                     return;
                 }
                 this.y += this.speed * this.speedMultiplier;
@@ -180,7 +180,7 @@ class MovableObject {
 
 
     isAboveGround() {
-        return this.y < 370;
+        return this.y < 600;
     }
 
     checkKeyboard() {
@@ -213,7 +213,8 @@ class MovableObject {
 
 
     decreaseHealth(enemy) {
-        if (this.health > 0) {
+        if (!this.isDead() && !enemy.isDead()) {
+            console.log('getting dmg')
             this.health -= enemy.attack_damage;
             this.lasthit = new Date().getTime()
         }

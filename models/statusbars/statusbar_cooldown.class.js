@@ -5,6 +5,6 @@ class StatusBar_Cooldown extends StatusBar {
     draw(ctx) {
         ctx.font = '32px serif';
         ctx.fillStyle = "red";
-        ctx.fillText(`${this.cooldown}`, 650, 450, 100);
+        ctx.fillText(`${this.cooldown}`, 930, 670, 100);
     }
 }

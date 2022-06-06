@@ -34,12 +34,23 @@
     <script src="models/enemies/jellyfish_veryhard.class.js"></script>
     <script src="levels/level1.js"></script>
     <script src="js/game.js"></script>
+    <script src="js/templates.js"></script>
     <title>Sharkie</title>
 </head>
 
 <body onload="init()">
+
     <h1>Sharkie</h1>
-    <canvas width="720" height="480" id="canvas">
+    <div class="navBtns" id="navBtns">
+        <button onclick="startGame()" class="startBtn" id="startBtn"><img  src="img/6.Botones/Start/2.png" alt=""></button>
+        <button onclick="openFullscreen(canvas)" class="fullScreenBtn" id="fullScreenBtn"><img src="img/6.Botones/Full Screen/Mesa de trabajo 7.png" alt=""></button>
+        <button onclick="retry()" class="retryBtn" id="retryBtn"><img src="img/6.Botones/Try again/Recurso 17.png" alt=""></button>
+    </div>
+    <div class="instructions" id="instructions">
+    </div>
+    <div class="instructionPages" id="instructionPages"><button onclick="renderTemplate(1)">1</button><button onclick="renderTemplate(2)">2</button><button onclick="renderTemplate(3)">3</button><button onclick="renderTemplate(4)">4</button></div>
+    <div class="endScreen" id="endScreen"><img src="img/6.Botones/Tittles/Game Over/Recurso 12.png" alt=""></div>
+    <canvas width="1056" height="720" id="canvas">
 
     </canvas>
 </body>

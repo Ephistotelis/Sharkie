@@ -5,6 +5,6 @@ class StatusBar_Score extends StatusBar {
     draw(ctx) {
         ctx.font = '32px serif';
         ctx.fillStyle = "red";
-        ctx.fillText(`${this.score}`, 600, 50, 100);
+        ctx.fillText(`${this.score}`, 930, 50, 100);
     }
 }

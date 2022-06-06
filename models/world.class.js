@@ -8,6 +8,11 @@ class World {
     score = 0;
     spawntimer = 1000;
     spawnedBoss = false;
+
+
+    gameActiv = true;
+
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -22,9 +27,20 @@ class World {
         this.spawnEnemies()
         this.despawnEnemies()
         this.despawnEnemiesWhenDead()
-            //this.speedGameProgress();          disabled for NOW
+        this.endGame()
+            //this.speedGameProgress(); //     disabled for NOW
     }
 
+
+    endGame() {
+        setInterval(() => {
+            if (this.character.isDead()) {
+                this.gameActiv = false;
+                //this.endscreen()
+            }
+        }, 100);
+
+    }
 
     despawnEnemies() {
 
@@ -61,21 +77,36 @@ class World {
 
     spawnEnemyProgress() {
         setInterval(() => {
-            if (this.score > 500 && this.score < 1500) {
-                this.level.enemies.push(new Pufferfish_easy(1000))
-                    //this.level.enemies.push(new Jellyfish_easy(1000))
-                    //this.level.enemies.push(new Jellyfish_medium(1000))
-                    //this.level.enemies.push(new Jellyfish_hard(1000))
-                    //this.level.enemies.push(new Jellyfish_veryhard(1000))
+            if (this.score > 0 && this.score < 1500) {
+                this.level.enemies.push(new Pufferfish_easy(1100))
+                    //this.level.enemies.push(new Jellyfish_easy(1100))
+                    //this.level.enemies.push(new Jellyfish_medium(1100))
+                    //this.level.enemies.push(new Jellyfish_hard(1100))
+                    //this.level.enemies.push(new Jellyfish_veryhard(1100))
             }
             if (this.score > 1000 && this.score < 2000) {
-                this.level.enemies.push(new Jellyfish_easy(1000))
+                this.level.enemies.push(new Jellyfish_easy(1100))
             }
-            if (this.score > 2000 && this.score < 3000) {
-                this.level.enemies.push(new Pufferfish_medium(1000))
+            if (this.score > 1500 && this.score < 3000) {
+                this.level.enemies.push(new Pufferfish_medium(1100))
             }
             if (this.score > 2500 && this.score < 3500) {
-                this.level.enemies.push(new Pufferfish_hard(1000))
+                this.level.enemies.push(new Pufferfish_hard(1100))
+            }
+            if (this.score > 3000 && this.score < 4500) {
+                this.level.enemies.push(new Jellyfish_medium(1100))
+            }
+            if (this.score > 4000 && this.score < 5500) {
+                this.level.enemies.push(new Jellyfish_hard(1100))
+            }
+            if (this.score > 5500 && this.score < 6500) {
+                this.level.enemies.push(new Jellyfish_veryhard(1100))
+            }
+            if (this.score > 6500) {
+                this.level.enemies.push(new Pufferfish_hard(1100))
+                this.level.enemies.push(new Jellyfish_medium(1100))
+                this.level.enemies.push(new Jellyfish_hard(1100))
+
             }
         }, 2000);
     }
@@ -83,7 +114,7 @@ class World {
 
     spawnEnemies() {
         setInterval(() => {
-            this.level.enemies.push(new Pufferfish_easy(1000))
+            this.level.enemies.push(new Pufferfish_easy(1100))
         }, 2000);
     }
 
@@ -168,21 +199,23 @@ class World {
 
 
     draw() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+        if (this.gameActiv == true) {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
-        this.addObjectsToMap(this.level.backgroundObjectsAll)
-        this.addObjectsToMap(this.level.barriers)
-        this.addObjectsToMap(this.level.enemies)
-        this.addObjectsToMap(this.level.endboss)
-        this.addObjectsToMap(this.level.attackObject)
-        this.addStatusBarsToMap(this.level.statusbars)
-        this.addToMap(this.character)
+            this.addObjectsToMap(this.level.backgroundObjectsAll)
+            this.addObjectsToMap(this.level.barriers)
+            this.addObjectsToMap(this.level.enemies)
+            this.addObjectsToMap(this.level.endboss)
+            this.addObjectsToMap(this.level.attackObject)
+            this.addStatusBarsToMap(this.level.statusbars)
+            this.addToMap(this.character)
 
-        // draw wird immer wieder aufgerufen
-        let self = this;
-        requestAnimationFrame(function() {
-            self.draw();
-        });
+            // draw wird immer wieder aufgerufen
+            let self = this;
+            requestAnimationFrame(function() {
+                self.draw();
+            });
+        }
     }
 
 
@@ -230,4 +263,7 @@ class World {
         }, 1000 / 60);
     }
 
+    isGameActiv() {
+        return this.gameActiv == true
+    }
 }
