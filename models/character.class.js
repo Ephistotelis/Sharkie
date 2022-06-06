@@ -72,6 +72,7 @@ class Character extends MovableObject {
     height = 150;
     health = 100;
     max_health = 100;
+    heal_value = 10;
     coolDownAttack = 0;
     attack_damage = 10;
     constructor() {
@@ -102,14 +103,15 @@ class Character extends MovableObject {
         this.setImmortal();
     }
 
+
     heal() {
-        if (this.health < this.max_health - 10) {
-            this.health += 10;
+        if (this.health < this.max_health - this.heal_value) {
+            this.health += this.heal_value;
         } else {
             this.health = this.max_health
         }
-        console.log(this.health)
     }
+
 
     setImmortal() {
         this.immortal = true;
@@ -122,6 +124,7 @@ class Character extends MovableObject {
     boostATK() {
         this.attack_damage += 3;
     }
+
 
     move() {
         this.moveRight();

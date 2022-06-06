@@ -161,9 +161,11 @@ class World {
     checkCollisions() {
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
-                if (this.character.checkCollision(enemy) && this.character.immortal == false) {
-                    // console.log('hit by', enemy) //                                                                                                               consollog
-                    this.character.decreaseHealth(enemy);
+                if (this.character.checkCollision(enemy)) {
+                    // console.log('hit by', enemy) // 
+                    if (this.character.immortal == false) {
+                        this.character.decreaseHealth(enemy);
+                    }
                     enemy.decreaseHealth(this.character);
                     //  console.log("Character health:", this.character.health); //                                                                                  consollog
                     // console.log("Enemy health", enemy.health); //                                                                                                   consollog

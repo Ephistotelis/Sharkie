@@ -58,7 +58,7 @@ function templateInstructions2() {
 function templateInstructions3() {
     return `
     <div class="howItWorks">
-        <p>Collecting Coins boost your Physicaldamge permanently! <br> Also you gonna receive immortality for 2 seconds! <br> For each Coin collected you gain extra 500 points for your endscore!</p>
+        <p>Collecting Coins boost your Physicaldamge permanently! <br> Also you gonna receive a small heal and immortality for 2 seconds! <br> For each Coin collected you gain extra 500 points for your endscore!</p>
     </div>
     `
 }
