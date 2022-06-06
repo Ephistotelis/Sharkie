@@ -20,6 +20,7 @@ class MovableObject {
     attack_damage = 5;
 
     immortal = false;
+    DEAD = false;
     //Movement
     angle;
     anglespeed;
@@ -239,4 +240,9 @@ class MovableObject {
         return Math.random() * (max - min) + min;
     }
 
+
+    //test
+    moveToDespawn() {
+        this.x = -99;
+    }
 }

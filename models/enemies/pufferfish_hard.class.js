@@ -1,9 +1,11 @@
 class Pufferfish_hard extends Pufferfish {
     IMAGES_SWIMMING = [
-        'img/2.Enemy/2 Jelly fish/Súper dangerous/Green 1.png',
-        'img/2.Enemy/2 Jelly fish/Súper dangerous/Green 2.png',
-        'img/2.Enemy/2 Jelly fish/Súper dangerous/Green 3.png',
-        'img/2.Enemy/2 Jelly fish/Súper dangerous/Green 4.png',
+        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png',
+        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim2.png',
+        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim3.png',
+        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim4.png',
+        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim5.png',
+
 
     ];
     IMAGES_DEAD = [
@@ -23,7 +25,7 @@ class Pufferfish_hard extends Pufferfish {
 
 
     constructor(spawnpoint) {
-        super().loadImage('img/2.Enemy/2 Jelly fish/Súper dangerous/Green 1.png')
+        super().loadImage('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png')
         this.x = spawnpoint;
         this.loadImagesALL(this.IMAGES_ALL)
         this.animate(this.IMAGES_SWIMMING)

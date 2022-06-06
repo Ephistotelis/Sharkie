@@ -31,7 +31,7 @@ class World {
         setInterval(() => {
             this.level.enemies.forEach((enemy, index) => {
                 if (enemy.checkPosition() < -100) {
-                    //console.log("before:", enemy, 'out of canvas')
+                    console.log(enemy, 'out of canvas')
                     this.level.enemies.splice(index, 1)
                 }
             })
@@ -41,10 +41,18 @@ class World {
     despawnEnemiesWhenDead() {
         setInterval(() => {
             this.level.enemies.forEach((enemy, index) => {
-                if (enemy.isDead()) {
-                    this.level.enemies.splice(index, 1)
-                        //console.log(this.level.enemies)
-                        //console.log('enemy dead:', enemy)
+                if (enemy.isDead() && enemy.DEAD == false) {
+                    enemy.attack_damag = 0;
+                    enemy.DEAD = true;
+                    console.log(index, enemy)
+                    setTimeout(() => {
+                        //this.level.enemies.splice(index, 1)
+                        enemy.moveToDespawn()
+                        console.log(this.level.enemies)
+                    }, 600);
+
+                    //console.log(this.level.enemies)
+                    //console.log('enemy dead:', enemy)
                 }
             })
         }, 10);
