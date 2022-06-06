@@ -235,7 +235,7 @@ class MovableObject {
 
     decreaseHealth(enemy) {
         if (!this.isDead() && !enemy.isDead()) {
-            console.log('getting dmg')
+            console.log('getting dmg', 'enemy did', enemy.attack_damage, 'damage!')
             this.health -= enemy.attack_damage;
             this.lasthit = new Date().getTime()
         }

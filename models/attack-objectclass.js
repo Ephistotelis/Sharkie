@@ -8,7 +8,6 @@ class AttackObject extends MovableObject {
         setInterval(() => {
             this.x += 3;
         }, 1000 / 60);
-
     }
 
     finSlap() {

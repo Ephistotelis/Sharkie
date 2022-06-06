@@ -4,7 +4,7 @@ In the following section you can see all stats of every unit and where to adjust
 Stats:
 
 #Charachter:
-    -Attack = 10            (+2 for every coin collected)
+    -Attack = 10            (+3 for every coin collected)
     -Health = 200
 
 #Pufferfish:

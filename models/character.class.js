@@ -75,6 +75,7 @@ class Character extends MovableObject {
     heal_value = 10;
     coolDownAttack = 0;
     attack_damage = 10;
+    boostATK_value = 3;
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png')
         this.loadImagesALL(this.IMAGES_ALL)
@@ -122,7 +123,7 @@ class Character extends MovableObject {
 
 
     boostATK() {
-        this.attack_damage += 3;
+        this.attack_damage += this.boostATK_value;
     }
 
 

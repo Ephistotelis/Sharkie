@@ -6,6 +6,7 @@ let gamestart = false;
 let endscreen;
 let startBtn;
 let retryBtn;
+let fullscreenbtn;
 let instructions;
 let instructionsPage;
 let scoreList = [];
@@ -16,6 +17,7 @@ function init() {
     endscreen = document.getElementById('endScreen')
     startBtn = document.getElementById('startBtn')
     retryBtn = document.getElementById('retryBtn')
+    fullscreenbtn = document.getElementById('fullScreenBtn')
     instructions = document.getElementById('instructions')
     instructionsPage = document.getElementById('instructionPages')
     renderTemplate(1);
@@ -28,6 +30,7 @@ function startGame() {
     if (gamestart === false) {
         gamestart = true;
         canvas.style.display = 'block';
+        fullscreenbtn.style.display = 'block';
         startBtn.style.display = 'none';
         instructions.style.display = 'none';
         instructionsPage.style.display = 'none';
