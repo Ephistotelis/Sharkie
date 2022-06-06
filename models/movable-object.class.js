@@ -180,7 +180,7 @@ class MovableObject {
 
 
     isAboveGround() {
-        return this.y < 600;
+        return this.y < 570;
     }
 
     checkKeyboard() {
@@ -196,19 +196,41 @@ class MovableObject {
 
 
     drawHitbox(ctx) {
-        if (this instanceof Character || this instanceof Pufferfish || this instanceof Endboss || this instanceof Jellyfish) {
+        if (this instanceof Endboss || this instanceof Jellyfish) {
             ctx.beginPath();
             ctx.lineWidth = '3';
             ctx.strokeStyle = 'blue'
             ctx.rect(this.x, this.y, this.width, this.height)
             ctx.stroke();
         }
-
+        if (this instanceof Pufferfish) {
+            ctx.beginPath();
+            ctx.lineWidth = '3';
+            ctx.strokeStyle = 'blue'
+            ctx.rect(this.x, this.y + 5, this.width, this.height - 30)
+            ctx.stroke();
+        }
+        if (this instanceof Character) {
+            ctx.beginPath();
+            ctx.lineWidth = '3';
+            ctx.strokeStyle = 'blue'
+            ctx.rect(this.x + 20, this.y + 65, this.width - 40, this.height - 90)
+            ctx.stroke();
+        }
     }
 
 
     checkCollision(mo) {
-        return this.x + this.width > mo.x && this.y + this.height > mo.y && this.x < mo.x + this.width && this.y < mo.y + mo.height;
+        if (this instanceof Character && mo instanceof Pufferfish) {
+            return (this.x + 20) + (this.width - 40) > mo.x && (this.y + 65) + (this.height - 90) > (mo.y + 5) && (this.x + 20) < mo.x + (this.width - 40) && (this.y + 65) < (mo.y + 5) + (mo.height - 30);
+        }
+        if (this instanceof Character) {
+            return (this.x + 20) + (this.width - 40) > mo.x && (this.y + 65) + (this.height - 90) > mo.y && (this.x + 20) < mo.x + (this.width - 40) && (this.y + 65) < mo.y + mo.height;
+        } else {
+            return this.x + this.width > mo.x && this.y + this.height > mo.y && this.x < mo.x + this.width && this.y < mo.y + mo.height;
+        }
+
+
     }
 
 

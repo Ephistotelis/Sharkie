@@ -9,7 +9,7 @@ class World {
     spawntimer = 1000;
     spawnedBoss = false;
 
-
+    DEV_MODE = false;
     gameActiv = true;
 
 
@@ -23,12 +23,14 @@ class World {
         this.countScore();
         this.setWorld();
         //this.spawnBoss();
-        this.spawnEnemyProgress();
-        this.spawnEnemies()
-        this.despawnEnemies()
-        this.despawnEnemiesWhenDead()
-        this.endGame()
-            //this.speedGameProgress(); //     disabled for NOW
+        // this.spawnEnemyProgress();
+        //this.spawnEnemies();
+        this.spawnCoins();
+        this.spawnBottle();
+        this.despawnObjects();
+        this.despawnEnemiesWhenDead();
+        this.endGame();
+        //this.speedGameProgress(); //     disabled for NOW
     }
 
 
@@ -36,19 +38,25 @@ class World {
         setInterval(() => {
             if (this.character.isDead()) {
                 this.gameActiv = false;
-                //this.endscreen()
             }
         }, 100);
 
     }
 
-    despawnEnemies() {
+    despawnObjects() {
 
         setInterval(() => {
             this.level.enemies.forEach((enemy, index) => {
                 if (enemy.checkPosition() < -100) {
                     console.log(enemy, 'out of canvas')
                     this.level.enemies.splice(index, 1)
+                }
+            })
+
+            this.level.collectableObjects.forEach((item, index) => {
+                if (item.checkPosition() < -100) {
+                    console.log(item, 'out of canvas')
+                    this.level.collectableObjects.splice(index, 1)
                 }
             })
         }, 100);
@@ -73,16 +81,23 @@ class World {
             })
         }, 10);
     }
+    spawnCoins() {
+        setInterval(() => {
+            this.level.collectableObjects.push(new Coin())
+        }, 6000); //6000
+    }
 
+
+    spawnBottle() {
+        setInterval(() => {
+            this.level.collectableObjects.push(new Bottle())
+        }, 6500); //6500
+    }
 
     spawnEnemyProgress() {
         setInterval(() => {
             if (this.score > 0 && this.score < 1500) {
                 this.level.enemies.push(new Pufferfish_easy(1100))
-                    //this.level.enemies.push(new Jellyfish_easy(1100))
-                    //this.level.enemies.push(new Jellyfish_medium(1100))
-                    //this.level.enemies.push(new Jellyfish_hard(1100))
-                    //this.level.enemies.push(new Jellyfish_veryhard(1100))
             }
             if (this.score > 1000 && this.score < 2000) {
                 this.level.enemies.push(new Jellyfish_easy(1100))
@@ -135,7 +150,6 @@ class World {
 
     }
 
-
     checkCollisions() {
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
@@ -145,6 +159,17 @@ class World {
                     enemy.decreaseHealth(this.character);
                     //  console.log("Character health:", this.character.health); //                                                                                  consollog
                     // console.log("Enemy health", enemy.health); //                                                                                                   consollog
+                }
+            })
+            this.level.collectableObjects.forEach((item, index) => {
+                if (this.character.checkCollision(item)) {
+                    if (item instanceof Bottle) {
+                        this.character.reduceCD();
+                    }
+                    if (item instanceof Coin) {
+                        this.character.addCoin();
+                    }
+                    this.level.collectableObjects.splice(index, 1)
                 }
             })
             this.level.endboss.forEach((enemy) => {
@@ -175,6 +200,7 @@ class World {
                         }
                     }
                 });
+
                 this.level.endboss.forEach((enemy) => {
                     for (let i = 0; i < this.level.attackObject.length; i++) {
                         if (this.level.attackObject[i].checkCollision(enemy)) {
@@ -188,7 +214,6 @@ class World {
                 })
 
             }
-
         }, 10);
     }
 
@@ -207,6 +232,7 @@ class World {
             this.addObjectsToMap(this.level.enemies)
             this.addObjectsToMap(this.level.endboss)
             this.addObjectsToMap(this.level.attackObject)
+            this.addObjectsToMap(this.level.collectableObjects)
             this.addStatusBarsToMap(this.level.statusbars)
             this.addToMap(this.character)
 

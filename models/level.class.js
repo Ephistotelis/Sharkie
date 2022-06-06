@@ -5,6 +5,7 @@ class Level {
     endboss;
     statusbars;
     attackObject = [];
+    collectableObjects = [];
     constructor(enemies, endboss, barriers, backgroundObjectsAll, statusbars) {
         this.enemies = enemies;
         this.endboss = endboss;

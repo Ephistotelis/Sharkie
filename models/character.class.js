@@ -63,12 +63,14 @@ class Character extends MovableObject {
         this.IMAGES_HURT,
         this.IMAGES_ATTACK_BUBBLE
     ];
-
+    coins_collected = 0;
     currentImage = 0;
     world;
     speed = 3;
     y = 100;
-    health = 2;
+    width = 150;
+    height = 150;
+    health = 200000000000;
     coolDownAttack = 0;
     attack_damage = 10;
     constructor() {
@@ -79,6 +81,20 @@ class Character extends MovableObject {
         this.applyGravity();
         this.attack_bubble();
         this.decreaseCoolDownOverTime();
+    }
+
+    reduceCD() {
+        if (this.coolDownAttack > 5) {
+            this.coolDownAttack -= 5;
+        } else {
+            this.coolDownAttack -= this.coolDownAttack;
+        }
+
+    }
+
+
+    addCoin() {
+        this.coins_collected += 1;
     }
 
 
@@ -115,7 +131,7 @@ class Character extends MovableObject {
                 setTimeout(() => {
                     this.world.level.attackObject.push(new Attack_Bubble(this.world))
                 }, 700);
-                this.coolDownAttack += 5;
+                this.coolDownAttack += 15;
                 this.used_attack_Bubble = true;
                 this.currentImage = 0;
                 setTimeout(() => {
