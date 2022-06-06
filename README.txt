@@ -1,7 +1,9 @@
-This game is designed as endless running game. The goal is to achieve the highest score possible! Every score is saved in localstorage and shown on the scoreboard.
+This game is designed as endless running game. The goal is to achieve the highest score possible! 
+Every score is saved in localstorage and shown on the scoreboard.
 Every second you gain 100+ points to your score. 
-At the end your score is calculated like this: score over time + (the amount of coins * 500points) + (the amount of kills *300points)
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+At the end your score is calculated like this: 
+score over time + (the amount of coins * 500points) + (the amount of kills *300points)
+-----------------------------------------------------------------------------------------------------------------------------
 Gamemechanic:
     #Bottles:
             - by collecting bottle your ability´s cooldown is reduced by 5 seconds
@@ -10,11 +12,13 @@ Gamemechanic:
             - by collecting coins you gain 500+ poins for your endscore
             - your character_Attackdamge is rising by +3
             - your character gains immortility for 2 seconds
-                - while immortal you can still hit enemies but they cant hit you. Means you can kill enemies to get more points without getting damage yourself
+                - while immortal you can still hit enemies but they cant hit you. 
+                  Means you can kill enemies to get more points without getting damage yourself
 
     #Enemeies:
             - There are TWO types of normal enemies and ONE type of Endboss
-            - in gameprogress different enemies gonna spawn with better health and attackdamage stats       !! scroll down to see all enemy stats!
+            - in gameprogress different enemies gonna spawn with better health and attackdamage stats       
+            !! scroll down to see all enemy stats!
             - every time you and an enemy collides, both getting damage depends on enemy_AttackDamage
                 - if your character is immortal due to collecting a coin, only the enemy is getting damage
                 - if the enemy you are colliding with is dead, your character wont take damage anymore
@@ -28,7 +32,7 @@ Gamemechanic:
             #Endboss
                 - there is only 1 type of endboss with scaling health!
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------
 Controlls :
 
 #Movement
@@ -42,7 +46,7 @@ D / ArrowRight      = MoveRight
 
 SPACE               = Use ability (Bubble Attack)
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------
 
 Stats:
 
@@ -51,7 +55,8 @@ Stats:
     -Health = 200
         #Spells:
             #Bubble Attack:
-                - 200 + character_Attackdamge       !! coins boost the attackdamage of your character permanently, that means Bubble Attack damage is scaling aswell
+                - 200 + character_Attackdamge       
+            !! coins boost the attackdamage of your character permanently, that means Bubble Attack damage is scaling aswell
 
 #Pufferfish:
     #easy:
@@ -82,7 +87,7 @@ Stats:
     -Attack = ??
     -Health = ??
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------
 It is possible to adjust your character, enemies and when which enemies spawn.
 In the following section you can see all stats of every unit and where to adjust it.
 
