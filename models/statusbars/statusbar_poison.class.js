@@ -1,5 +1,5 @@
 class StatusBar_Poison extends StatusBar {
-    y = 50;
+    y = 70;
     img;
     ANIMATION_HEALTHBAR = [
         'img/4. Marcadores/Purple/0_.png',

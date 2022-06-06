@@ -1,9 +1,5 @@
 const level1 = new Level(
-    [
-        new Pufferfish_easy(750),
-        new Pufferfish_easy(850),
-        new Pufferfish_easy(950),
-    ], [], [
+    [], [], [
         //new Barrier()
     ], [
         // fürs erste ohne moving background, später mit moving background und die grafix bugs fixen
@@ -22,7 +18,7 @@ const level1 = new Level(
         new Background('img/3. Background/Layers/2. Floor/D2.png', 719), */
     ], [
         new StatusBar_Health(),
-        new StatusBar_Poison(),
+        //new StatusBar_Poison(),
         new StatusBar_Coin(),
         new StatusBar_Score(),
         new StatusBar_Cooldown(),

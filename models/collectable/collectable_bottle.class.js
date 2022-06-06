@@ -16,7 +16,9 @@ class Bottle extends CollectableObjects {
         super().loadImage('img/4. Marcadores/Posión/Animada/1.png')
         this.loadImages(this.IMAGES_ANIMATION)
         this.animate(this.IMAGES_ANIMATION)
+        this.setStats()
         this.flowLeft()
+        this.sinusoidalWaveMovementY()
     }
 
 }

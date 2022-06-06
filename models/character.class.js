@@ -70,7 +70,8 @@ class Character extends MovableObject {
     y = 100;
     width = 150;
     height = 150;
-    health = 200000000000;
+    health = 100;
+    max_health = 100;
     coolDownAttack = 0;
     attack_damage = 10;
     constructor() {
@@ -95,8 +96,32 @@ class Character extends MovableObject {
 
     addCoin() {
         this.coins_collected += 1;
+        this.world.level.statusbars[1].coinsAmount += 1;
+        this.boostATK();
+        this.heal();
+        this.setImmortal();
     }
 
+    heal() {
+        if (this.health < this.max_health - 10) {
+            this.health += 10;
+        } else {
+            this.health = this.max_health
+        }
+        console.log(this.health)
+    }
+
+    setImmortal() {
+        this.immortal = true;
+        setTimeout(() => {
+            this.immortal = false;
+        }, 2000);
+    }
+
+
+    boostATK() {
+        this.attack_damage += 3;
+    }
 
     move() {
         this.moveRight();
@@ -146,13 +171,15 @@ class Character extends MovableObject {
         setInterval(() => {
 
             if (this.coolDownAttack > 0) {
-                this.world.level.statusbars[4].cooldown = this.coolDownAttack;
+                this.world.level.statusbars[3].cooldown = this.coolDownAttack;
                 this.coolDownAttack -= 1;
                 // console.log('Cooldown:', this.coolDownAttack) //                                                                     consollog
             } else {
-                this.world.level.statusbars[4].cooldown = this.coolDownAttack;
+                this.world.level.statusbars[3].cooldown = this.coolDownAttack;
             }
 
         }, 1000);
     }
+
+
 }

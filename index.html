@@ -46,16 +46,26 @@
     <h1>Sharkie</h1>
     <div class="navBtns" id="navBtns">
         <button onclick="startGame()" class="startBtn" id="startBtn"><img  src="img/6.Botones/Start/2.png" alt=""></button>
-        <button onclick="openFullscreen(canvas)" class="fullScreenBtn" id="fullScreenBtn"><img src="img/6.Botones/Full Screen/Mesa de trabajo 7.png" alt=""></button>
+        <div class="F11"> Press F11 after game started for fullscreen!</div>
         <button onclick="retry()" class="retryBtn" id="retryBtn"><img src="img/6.Botones/Try again/Recurso 17.png" alt=""></button>
     </div>
     <div class="instructions" id="instructions">
     </div>
-    <div class="instructionPages" id="instructionPages"><button onclick="renderTemplate(1)">1</button><button onclick="renderTemplate(2)">2</button><button onclick="renderTemplate(3)">3</button><button onclick="renderTemplate(4)">4</button></div>
+    <div class="instructionPages" id="instructionPages"><button onclick="renderTemplate(1)" id="pageBtn1">1</button><button onclick="renderTemplate(2)" id="pageBtn2">2</button><button onclick="renderTemplate(3)" id="pageBtn3">3</button><button onclick="renderTemplate(4)" id="pageBtn4">4</button></div>
     <div class="endScreen" id="endScreen"><img src="img/6.Botones/Tittles/Game Over/Recurso 12.png" alt=""></div>
     <canvas width="1056" height="720" id="canvas">
 
     </canvas>
+    <div class="scoreBoard" id="scoreBoard">
+        <div class="SCHeader">
+            <h2>Scoreboard</h2>
+        </div>
+        <div class="scores" id="scores">
+        </div>
+        <div class="clearScoreBtn">
+            <button onclick="clearScore()">Clear Scoreboard</button>
+        </div>
+    </div>
 </body>
 
 </html>

@@ -3,7 +3,7 @@ class StatusBar_Score extends StatusBar {
     height = 40;
     score = 0;
     draw(ctx) {
-        ctx.font = '32px serif';
+        ctx.font = '32px LuckiestGuy';
         ctx.fillStyle = "red";
         ctx.fillText(`${this.score}`, 930, 50, 100);
     }

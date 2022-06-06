@@ -5,20 +5,21 @@ let world;
 let gamestart = false;
 let endscreen;
 let startBtn;
-let fullScreenBtn;
 let retryBtn;
 let instructions;
 let instructionsPage;
+let scoreList = [];
 
 function init() {
     canvas = document.getElementById('canvas')
     endscreen = document.getElementById('endScreen')
     startBtn = document.getElementById('startBtn')
-    fullScreenBtn = document.getElementById('fullScreenBtn')
     retryBtn = document.getElementById('retryBtn')
     instructions = document.getElementById('instructions')
     instructionsPage = document.getElementById('instructionPages')
     renderTemplate(1);
+    loadScore()
+    renderScoreboard()
 }
 
 function startGame() {
@@ -26,7 +27,6 @@ function startGame() {
         gamestart = true;
         canvas.style.display = 'block';
         startBtn.style.display = 'none';
-        fullScreenBtn.style.display = 'none';
         instructions.style.display = 'none';
         instructionsPage.style.display = 'none';
         world = new World(canvas, keyboard);
@@ -118,4 +118,37 @@ function openFullscreen(elem) {
     } else if (elem.msRequestFullscreen) { /* IE11 */
         elem.msRequestFullscreen();
     }
+}
+
+function addScoreToLS(score) {
+    let endscore = score;
+    scoreList.push(endscore)
+    localStorage.setItem('Score', JSON.stringify(scoreList))
+}
+
+
+function loadScore() {
+    let LSscore = localStorage.getItem('Score')
+    if (!LSscore) {
+        return
+    }
+    let LSscoreJSON = JSON.parse(LSscore)
+    scoreList = LSscoreJSON;
+}
+
+
+function renderScoreboard() {
+    let scoreboard = document.getElementById('scores')
+    scoreboard.innerHTML = ''
+    for (let i = 0; i < scoreList.length; i++) {
+        let score = scoreList[i]
+        scoreboard.innerHTML += tempalateScoreBoard(i, score)
+    }
+}
+
+
+function clearScore() {
+    localStorage.clear();
+    scoreList = [];
+    renderScoreboard();
 }

@@ -1,8 +1,8 @@
 class StatusBar {
     x = 20;
     y;
-    width = 180;
-    height = 50;
+    width = 240;
+    height = 70;
     img;
     imageCache = {};
     world;

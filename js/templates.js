@@ -9,13 +9,29 @@ function templatesALL(page) {
 
     switch (page) {
         case 1:
+            document.getElementById('pageBtn1').style.backgroundColor = 'var(--btn_color_selected)'
+            document.getElementById('pageBtn2').style.backgroundColor = 'var(--btn_color)'
+            document.getElementById('pageBtn3').style.backgroundColor = 'var(--btn_color)'
+            document.getElementById('pageBtn4').style.backgroundColor = 'var(--btn_color)'
             return templateInstructions1()
 
         case 2:
+            document.getElementById('pageBtn2').style.backgroundColor = 'var(--btn_color_selected)'
+            document.getElementById('pageBtn1').style.backgroundColor = 'var(--btn_color)'
+            document.getElementById('pageBtn3').style.backgroundColor = 'var(--btn_color)'
+            document.getElementById('pageBtn4').style.backgroundColor = 'var(--btn_color)'
             return templateInstructions2()
         case 3:
+            document.getElementById('pageBtn3').style.backgroundColor = 'var(--btn_color_selected)'
+            document.getElementById('pageBtn2').style.backgroundColor = 'var(--btn_color)'
+            document.getElementById('pageBtn1').style.backgroundColor = 'var(--btn_color)'
+            document.getElementById('pageBtn4').style.backgroundColor = 'var(--btn_color)'
             return templateInstructions3()
         case 4:
+            document.getElementById('pageBtn4').style.backgroundColor = 'var(--btn_color_selected)'
+            document.getElementById('pageBtn2').style.backgroundColor = 'var(--btn_color)'
+            document.getElementById('pageBtn3').style.backgroundColor = 'var(--btn_color)'
+            document.getElementById('pageBtn1').style.backgroundColor = 'var(--btn_color)'
             return templateInstructions4()
 
     }
@@ -42,7 +58,7 @@ function templateInstructions2() {
 function templateInstructions3() {
     return `
     <div class="howItWorks">
-        <p>Collection Coins boost your Physicaldamge permanently! <br> Also you gonna receive immortality for 2 seconds!</p>
+        <p>Collecting Coins boost your Physicaldamge permanently! <br> Also you gonna receive immortality for 2 seconds! <br> For each Coin collected you gain extra 500 points for your endscore!</p>
     </div>
     `
 }
@@ -64,5 +80,11 @@ function templateInstructions4() {
                 <p>Press <b>Space</b>, <br> to blow a deadly Bubble!</p>
             </div>
         </div>
+    `
+}
+
+function tempalateScoreBoard(i, score) {
+    return `
+    <ul><b>${i+1}.</b>     ${score}</ul>
     `
 }

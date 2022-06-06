@@ -10,10 +10,11 @@ class World {
     spawnedBoss = false;
 
     DEV_MODE = false;
-    gameActiv = true;
+    gameActiv = false;
 
 
     constructor(canvas, keyboard) {
+        this.gameActiv = true;
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
@@ -23,8 +24,8 @@ class World {
         this.countScore();
         this.setWorld();
         //this.spawnBoss();
-        // this.spawnEnemyProgress();
-        //this.spawnEnemies();
+        this.spawnEnemyProgress();
+        this.spawnEnemies();
         this.spawnCoins();
         this.spawnBottle();
         this.despawnObjects();
@@ -36,8 +37,10 @@ class World {
 
     endGame() {
         setInterval(() => {
-            if (this.character.isDead()) {
+            if (this.character.isDead() && this.isGameActiv()) {
                 this.gameActiv = false;
+                let endscore = this.score + (this.character.coins_collected * 500)
+                addScoreToLS(endscore)
             }
         }, 100);
 
@@ -62,6 +65,7 @@ class World {
         }, 100);
     }
 
+
     despawnEnemiesWhenDead() {
         setInterval(() => {
             this.level.enemies.forEach((enemy, index) => {
@@ -81,6 +85,8 @@ class World {
             })
         }, 10);
     }
+
+
     spawnCoins() {
         setInterval(() => {
             this.level.collectableObjects.push(new Coin())
@@ -93,6 +99,7 @@ class World {
             this.level.collectableObjects.push(new Bottle())
         }, 6500); //6500
     }
+
 
     spawnEnemyProgress() {
         setInterval(() => {
@@ -150,10 +157,11 @@ class World {
 
     }
 
+
     checkCollisions() {
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
-                if (this.character.checkCollision(enemy)) {
+                if (this.character.checkCollision(enemy) && this.character.immortal == false) {
                     // console.log('hit by', enemy) //                                                                                                               consollog
                     this.character.decreaseHealth(enemy);
                     enemy.decreaseHealth(this.character);
@@ -250,9 +258,12 @@ class World {
             this.addBarToMap(o)
         })
     }
+
+
     addBarToMap(bar) {
         bar.draw(this.ctx);
     }
+
 
     addObjectsToMap(objects) {
         objects.forEach(o => {
@@ -266,11 +277,12 @@ class World {
         mo.drawHitbox(this.ctx)
     }
 
+
     countScore() {
         setInterval(() => {
             if (!this.character.isDead()) {
                 this.score += 100;
-                this.level.statusbars[3].score = this.score;
+                this.level.statusbars[2].score = this.score;
                 //console.log(this.score)
             } else {
                 return
@@ -288,6 +300,7 @@ class World {
             })
         }, 1000 / 60);
     }
+
 
     isGameActiv() {
         return this.gameActiv == true
