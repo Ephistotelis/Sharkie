@@ -41,7 +41,7 @@ function templatesALL(page) {
 function templateInstructions1() {
     return `
     <div class="howItWorks">
-        <p>This game is designed as endless running game. <br> In progress the enemies will be harder to kill and deal more damage to your Character! </p>
+        <p>This game is designed as endless running game. <br> In progress the enemies will be harder to kill <br> and deal more damage to your Character! <br>For each Enemy you kill gain extra <b>300</b> points for your endscore </p>
     </div>
     `
 }
@@ -58,7 +58,7 @@ function templateInstructions2() {
 function templateInstructions3() {
     return `
     <div class="howItWorks">
-        <p>Collecting Coins boost your Physicaldamge permanently! <br> Also you gonna receive a small heal and immortality for 2 seconds! <br> For each Coin collected you gain extra 500 points for your endscore!</p>
+        <p>Collecting Coins boost your Physicaldamge permanently! <br> Also you gonna receive a small heal and immortality for 2 seconds! <br> For each Coin collected you gain extra <b>500</b> points for your endscore!</p>
     </div>
     `
 }

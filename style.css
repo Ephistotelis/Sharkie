@@ -16,6 +16,7 @@ body {
     align-items: center;
     background-image: url('img/3. Background/Mesa de trabajo 1.png');
     font-family: 'LuckiestGuy';
+    letter-spacing: 1px;
 }
 
 h1 {
@@ -145,7 +146,7 @@ canvas {
 }
 
 .instructions b {
-    color: red;
+    color: rgb(219, 77, 255);
 }
 
 .instructionPages button {

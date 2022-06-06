@@ -10,6 +10,7 @@ let instructions;
 let instructionsPage;
 let scoreList = [];
 
+
 function init() {
     canvas = document.getElementById('canvas')
     endscreen = document.getElementById('endScreen')
@@ -21,6 +22,7 @@ function init() {
     loadScore()
     renderScoreboard()
 }
+
 
 function startGame() {
     if (gamestart === false) {
@@ -36,6 +38,7 @@ function startGame() {
 
 }
 
+
 function endScreen() {
     setInterval(() => {
         if (world.gameActiv == false) {
@@ -46,14 +49,11 @@ function endScreen() {
     }, 100);
 }
 
+
 function retry() {
     window.location.reload()
 }
-/* document.addEventListener('click', (event) => {
-    if (event.pointerId == 1) {
-        keyboard.ATTACK = true;
-    }
-}) */
+
 document.addEventListener('keydown', (event) => {
     //multi consollogs
     /* console.log(event)
@@ -110,6 +110,7 @@ document.addEventListener('keyup', (event) => {
     // console.log('--------------')
 })
 
+
 function openFullscreen(elem) {
     if (elem.requestFullscreen) {
         elem.requestFullscreen();
@@ -120,6 +121,7 @@ function openFullscreen(elem) {
     }
 }
 
+
 function addScoreToLS(score) {
     let endscore = score;
     scoreList.push(endscore)
@@ -129,9 +131,7 @@ function addScoreToLS(score) {
 
 function loadScore() {
     let LSscore = localStorage.getItem('Score')
-    if (!LSscore) {
-        return
-    }
+    if (!LSscore) { return }
     let LSscoreJSON = JSON.parse(LSscore)
     scoreList = LSscoreJSON;
 }

@@ -8,8 +8,8 @@ class World {
     score = 0;
     spawntimer = 1000;
     spawnedBoss = false;
+    enemies_killed = 0;
 
-    DEV_MODE = false;
     gameActiv = false;
 
 
@@ -39,15 +39,13 @@ class World {
         setInterval(() => {
             if (this.character.isDead() && this.isGameActiv()) {
                 this.gameActiv = false;
-                let endscore = this.score + (this.character.coins_collected * 500)
+                let endscore = this.score + (this.character.coins_collected * 500) + (this.enemies_killed * 300)
                 addScoreToLS(endscore)
             }
         }, 100);
-
     }
 
     despawnObjects() {
-
         setInterval(() => {
             this.level.enemies.forEach((enemy, index) => {
                 if (enemy.checkPosition() < -100) {
@@ -55,7 +53,6 @@ class World {
                     this.level.enemies.splice(index, 1)
                 }
             })
-
             this.level.collectableObjects.forEach((item, index) => {
                 if (item.checkPosition() < -100) {
                     console.log(item, 'out of canvas')
@@ -72,13 +69,12 @@ class World {
                 if (enemy.isDead() && enemy.DEAD == false) {
                     enemy.attack_damag = 0;
                     enemy.DEAD = true;
+                    this.enemies_killed += 1;
                     console.log(index, enemy)
                     setTimeout(() => {
-                        //this.level.enemies.splice(index, 1)
                         enemy.moveToDespawn()
                         console.log(this.level.enemies)
                     }, 600);
-
                     //console.log(this.level.enemies)
                     //console.log('enemy dead:', enemy)
                 }
@@ -128,7 +124,6 @@ class World {
                 this.level.enemies.push(new Pufferfish_hard(1100))
                 this.level.enemies.push(new Jellyfish_medium(1100))
                 this.level.enemies.push(new Jellyfish_hard(1100))
-
             }
         }, 2000);
     }
