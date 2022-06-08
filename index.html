@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/1.Sharkie/1.IDLE/1.png">
     <script src="models/world.class.js"></script>
     <script src="models/level.class.js"></script>
     <script src="models/movable-object.class.js"></script>
@@ -45,13 +46,14 @@
 
     <h1>Sharkie</h1>
     <div class="navBtns" id="navBtns">
-        <button onclick="startGame()" class="startBtn" id="startBtn"><img  src="img/6.Botones/Start/2.png" alt=""></button>
-        <button onclick="openFullscreen(canvas)" class="fullScreenBtn" id="fullScreenBtn"><img src="img/6.Botones/Full Screen/Mesa de trabajo 7.png" alt=""></button>
-        <button onclick="retry()" class="retryBtn" id="retryBtn"><img src="img/6.Botones/Try again/Recurso 17.png" alt=""></button>
+        <button onclick="startGame()" class="startBtn pagebtn" id="startBtn"><img  src="img/6.Botones/Start/2.png" alt=""></button>
+        <button onclick="openFullscreen(canvas)" class="fullScreenBtn pagebtn" id="fullScreenBtn"><img src="img/6.Botones/Full Screen/Mesa de trabajo 7.png" alt=""></button>
+        <button onclick="retry()" class="retryBtn pagebtn" id="retryBtn"><img src="img/6.Botones/Try again/Recurso 17.png" alt=""></button>
     </div>
     <div class="instructions" id="instructions">
     </div>
-    <div class="instructionPages" id="instructionPages"><button onclick="renderTemplate(1)" id="pageBtn1">1</button><button onclick="renderTemplate(2)" id="pageBtn2">2</button><button onclick="renderTemplate(3)" id="pageBtn3">3</button><button onclick="renderTemplate(4)" id="pageBtn4">4</button></div>
+    <div class="instructionPages" id="instructionPages"><button onclick="renderTemplate(1)" id="pageBtn1" class="pagebtn">1</button><button onclick="renderTemplate(2)" id="pageBtn2" class="pagebtn">2</button><button onclick="renderTemplate(3)" id="pageBtn3" class="pagebtn">3</button><button onclick="renderTemplate(4)"
+            id="pageBtn4" class="pagebtn">🎮​</button></div>
     <div class="endScreen" id="endScreen"><img src="img/6.Botones/Tittles/Game Over/Recurso 12.png" alt=""></div>
     <canvas width="1056" height="720" id="canvas">
 
@@ -63,7 +65,7 @@
         <div class="scores" id="scores">
         </div>
         <div class="clearScoreBtn">
-            <button onclick="clearScore()">Clear Scoreboard</button>
+            <button onclick="clearScore()" class="pagebtn">Clear Scoreboard</button>
         </div>
     </div>
 </body>

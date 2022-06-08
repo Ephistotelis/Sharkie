@@ -18,11 +18,12 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.setWorld();
         this.draw();
         this.checkCollisions();
         this.checkCollisionsAttack();
         this.countScore();
-        this.setWorld();
+
         //this.spawnBoss();
         this.spawnEnemyProgress();
         this.spawnEnemies();
@@ -225,6 +226,7 @@ class World {
 
     setWorld() {
         this.character.world = this;
+        this.level.statusbars[0].world = this
     }
 
 

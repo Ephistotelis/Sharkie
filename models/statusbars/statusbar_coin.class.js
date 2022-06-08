@@ -1,6 +1,6 @@
 class StatusBar_Coin extends StatusBar {
     x = 300;
-    y = 30;
+    y = 15;
     width = 50;
     height = 50;
     img;
@@ -16,6 +16,6 @@ class StatusBar_Coin extends StatusBar {
 
         ctx.font = '32px LuckiestGuy';
         ctx.fillStyle = "white";
-        ctx.fillText(`${this.coinsAmount}`, 315, 65, 100);
+        ctx.fillText(`${this.coinsAmount}`, 315, 50, 100);
     }
 }
