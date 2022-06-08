@@ -5,8 +5,10 @@ class Pufferfish extends MovableObject {
     currentImage = 0;
     speed = 5;
     health = 20;
-
+    hurt_sound = new Audio('audio/hurt_enemy.mp3')
     speedY = 1;
+
+
     animate(animation) {
         setInterval(() => {
             if (this.isDead()) {
@@ -16,8 +18,4 @@ class Pufferfish extends MovableObject {
             }
         }, 1000 / 10)
     }
-
-
-
-
 }

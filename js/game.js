@@ -12,6 +12,7 @@ let instructionsPage;
 let scoreList = [];
 
 
+
 function init() {
     canvas = document.getElementById('canvas')
     endscreen = document.getElementById('endScreen')
@@ -112,6 +113,9 @@ document.addEventListener('keyup', (event) => {
     }
     // console.log('--------------')
 })
+
+
+
 
 
 function openFullscreen(elem) {

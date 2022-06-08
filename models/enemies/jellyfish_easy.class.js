@@ -29,6 +29,7 @@ class Jellyfish_easy extends Jellyfish {
         this.flowLeft()
         this.setStats()
         this.sinusoidalWaveMovementY()
+        this.hurt_sound.load()
     }
 
     sinusoidalWaveMovement() {

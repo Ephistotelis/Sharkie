@@ -76,6 +76,8 @@ class Character extends MovableObject {
     coolDownAttack = 0;
     attack_damage = 10;
     boostATK_value = 3;
+    bubble_sound = new Audio('audio/bubble.mp3');
+    hurt_sound = new Audio('audio/hurt.mp3')
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png')
         this.loadImagesALL(this.IMAGES_ALL)
@@ -84,6 +86,8 @@ class Character extends MovableObject {
         this.applyGravity();
         this.attack_bubble();
         this.decreaseCoolDownOverTime();
+        this.hurt_sound.load()
+
     }
 
     reduceCD() {
@@ -141,6 +145,9 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_DEAD)
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT)
+                if (this.world.gameActiv == true) {
+                    this.hurt_sound.play()
+                }
             } else if (this.attackedBubble()) {
                 this.playAnimation(this.IMAGES_ATTACK_BUBBLE)
             } else if (this.isAboveGround() && this.falling == true) {
@@ -155,7 +162,8 @@ class Character extends MovableObject {
     attack_bubble() {
         setInterval(() => {
             if (this.world.keyboard.ATTACK && this.coolDownAttack < 1) {
-
+                this.bubble_sound.load()
+                this.bubble_sound.play()
                 console.log('attacked') //         
                 setTimeout(() => {
                     this.world.level.attackObject.push(new Attack_Bubble(this.world))

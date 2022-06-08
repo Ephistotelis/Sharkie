@@ -12,12 +12,27 @@ class World {
 
     gameActiv = false;
 
+    selectedMusic = new Audio('audio/background_music_2.mp3')
+    sounds = {
+        "music1": new Audio('audio/background_music_1.mp3'),
+        "music2": new Audio('audio/background_music_2.mp3'),
+        "bubble": new Audio('audio/bubble.mp3'),
+        "hurt_character": new Audio('audio/hurt.mp3'),
+        "hurt_enemy": new Audio('audio/hurt_enemy.mp3'),
+        "collected_coin": new Audio('audio/collectCoin.mp3'),
+        "collected_bottle": new Audio('audio/collectBottle.mp3'),
+    }
 
-    constructor(canvas, keyboard) {
+
+
+    constructor(canvas, keyboard, music) {
         this.gameActiv = true;
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.playSound(this.selectedMusic)
+        this.selectedMusic.loop = true;
+        this.selectedMusic.volume = 0.2
         this.setWorld();
         this.draw();
         this.checkCollisions();
@@ -26,7 +41,6 @@ class World {
 
         //this.spawnBoss();
         this.spawnEnemyProgress();
-        this.spawnEnemies();
         this.spawnCoins();
         this.spawnBottle();
         this.despawnObjects();
@@ -34,7 +48,14 @@ class World {
         this.endGame();
         //this.speedGameProgress(); //     disabled for NOW
     }
+    playSound(sound) {
+        this.loadSound(sound);
+        sound.play()
+    }
 
+    loadSound(sound) {
+        sound.load()
+    }
 
     endGame() {
         setInterval(() => {
@@ -100,40 +121,39 @@ class World {
 
     spawnEnemyProgress() {
         setInterval(() => {
-            if (this.score > 0 && this.score < 1500) {
-                this.level.enemies.push(new Pufferfish_easy(1100))
-            }
-            if (this.score > 1000 && this.score < 2000) {
-                this.level.enemies.push(new Jellyfish_easy(1100))
-            }
-            if (this.score > 1500 && this.score < 3000) {
-                this.level.enemies.push(new Pufferfish_medium(1100))
-            }
-            if (this.score > 2500 && this.score < 3500) {
-                this.level.enemies.push(new Pufferfish_hard(1100))
-            }
-            if (this.score > 3000 && this.score < 4500) {
-                this.level.enemies.push(new Jellyfish_medium(1100))
-            }
-            if (this.score > 4000 && this.score < 5500) {
-                this.level.enemies.push(new Jellyfish_hard(1100))
-            }
-            if (this.score > 5500 && this.score < 6500) {
-                this.level.enemies.push(new Jellyfish_veryhard(1100))
-            }
-            if (this.score > 6500) {
-                this.level.enemies.push(new Pufferfish_hard(1100))
-                this.level.enemies.push(new Jellyfish_medium(1100))
-                this.level.enemies.push(new Jellyfish_hard(1100))
-            }
-        }, 2000);
-    }
+            if (this.gameActiv == true) {
 
 
-    spawnEnemies() {
-        setInterval(() => {
-            this.level.enemies.push(new Pufferfish_easy(1100))
-        }, 2000);
+                if (this.score > 0 && this.score < 1500) {
+                    this.level.enemies.push(new Pufferfish_easy(1100))
+                }
+                if (this.score > 1000 && this.score < 2000) {
+                    this.level.enemies.push(new Jellyfish_easy(1100))
+                }
+                if (this.score > 1500 && this.score < 3000) {
+                    this.level.enemies.push(new Pufferfish_medium(1100))
+                }
+                if (this.score > 2500 && this.score < 3500) {
+                    this.level.enemies.push(new Pufferfish_hard(1100))
+                }
+                if (this.score > 3000 && this.score < 4500) {
+                    this.level.enemies.push(new Jellyfish_medium(1100))
+                }
+                if (this.score > 4000 && this.score < 5500) {
+                    this.level.enemies.push(new Jellyfish_hard(1100))
+                }
+                if (this.score > 5500 && this.score < 6500) {
+                    this.level.enemies.push(new Jellyfish_veryhard(1100))
+                }
+                if (this.score > 6500) {
+                    this.level.enemies.push(new Pufferfish_hard(1100))
+                    this.level.enemies.push(new Jellyfish_medium(1100))
+                    this.level.enemies.push(new Jellyfish_hard(1100))
+                    this.level.enemies.push(new Pufferfish_easy(1100))
+                }
+            }
+        }, 2000)
+
     }
 
 
@@ -163,6 +183,9 @@ class World {
                         this.character.decreaseHealth(enemy);
                     }
                     enemy.decreaseHealth(this.character);
+                    if (this.gameActiv == true) {
+                        enemy.playHurtSound()
+                    }
                     //  console.log("Character health:", this.character.health); //                                                                                  consollog
                     // console.log("Enemy health", enemy.health); //                                                                                                   consollog
                 }
@@ -171,9 +194,11 @@ class World {
                 if (this.character.checkCollision(item)) {
                     if (item instanceof Bottle) {
                         this.character.reduceCD();
+                        this.sounds.collected_bottle.play()
                     }
                     if (item instanceof Coin) {
                         this.character.addCoin();
+                        this.sounds.collected_coin.play()
                     }
                     this.level.collectableObjects.splice(index, 1)
                 }
@@ -200,13 +225,13 @@ class World {
                         if (this.level.attackObject[i].checkCollision(enemy)) {
                             // console.log('hit by', enemy) //                                                                                                               consollog
                             enemy.decreaseHealth(this.level.attackObject[i]);
+                            enemy.playHurtSound()
                             this.level.attackObject.splice(this.level.attackObject[i], 1)
                             console.log("Character health:", this.character.health); //                                                                                  consollog
                             console.log("Enemy health", enemy.health); //                                                                                                   consollog
                         }
                     }
                 });
-
                 this.level.endboss.forEach((enemy) => {
                     for (let i = 0; i < this.level.attackObject.length; i++) {
                         if (this.level.attackObject[i].checkCollision(enemy)) {

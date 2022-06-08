@@ -3,7 +3,7 @@ class Jellyfish extends MovableObject {
     y = this.randomNumber(50, 600);
 
 
-
+    hurt_sound = new Audio('audio/hurt_enemy.mp3')
     currentImage = 0;
     speed = 2;
 

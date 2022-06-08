@@ -61,6 +61,7 @@ class MovableObject {
         let path = animation[i];
         this.img = this.imageCache[path];
         this.currentImage++
+
     }
 
 
@@ -266,5 +267,9 @@ class MovableObject {
     //test
     moveToDespawn() {
         this.x = -99;
+    }
+
+    playHurtSound() {
+        this.hurt_sound.play()
     }
 }
