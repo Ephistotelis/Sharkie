@@ -78,6 +78,8 @@ class Character extends MovableObject {
     boostATK_value = 3;
     bubble_sound = new Audio('audio/bubble.mp3');
     hurt_sound = new Audio('audio/hurt.mp3')
+
+
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png')
         this.loadImagesALL(this.IMAGES_ALL)
@@ -164,7 +166,6 @@ class Character extends MovableObject {
             if (this.world.keyboard.ATTACK && this.coolDownAttack < 1) {
                 this.bubble_sound.load()
                 this.bubble_sound.play()
-                console.log('attacked') //         
                 setTimeout(() => {
                     this.world.level.attackObject.push(new Attack_Bubble(this.world))
                 }, 700);
@@ -181,17 +182,12 @@ class Character extends MovableObject {
 
     decreaseCoolDownOverTime() {
         setInterval(() => {
-
             if (this.coolDownAttack > 0) {
                 this.world.level.statusbars[3].cooldown = this.coolDownAttack;
                 this.coolDownAttack -= 1;
-                // console.log('Cooldown:', this.coolDownAttack) //                                                                     consollog
             } else {
                 this.world.level.statusbars[3].cooldown = this.coolDownAttack;
             }
-
         }, 1000);
     }
-
-
 }

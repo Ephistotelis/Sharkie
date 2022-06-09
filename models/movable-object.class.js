@@ -41,12 +41,14 @@ class MovableObject {
         })
     }
 
+
     loadImagesALL(arr) {
         arr.forEach((array) => {
             this.loadImages(array)
         })
 
     }
+
 
     animate(animation) {
         setInterval(() => {
@@ -144,6 +146,7 @@ class MovableObject {
 
     }
 
+
     sinusoidalWaveMovementX() {
         setInterval(() => {
             this.x += 2 * Math.sin(this.angle)
@@ -151,6 +154,7 @@ class MovableObject {
         }, 100);
 
     }
+
 
     setStats() {
 
@@ -167,7 +171,6 @@ class MovableObject {
                 this.gravity_Y = 0;
                 this.acceleration = 0.1;
                 this.falling = false;
-                return
             } else {
                 if (this.isAboveGround()) {
                     this.falling = true;
@@ -183,12 +186,16 @@ class MovableObject {
         return this.y < 570;
     }
 
+
     checkKeyboard() {
         return this.world.keyboard.DOWN || this.world.keyboard.UP || this.world.keyboard.LEFT || this.world.keyboard.RIGHT == true
     }
+
+
     checkPosition() {
         return this.x
     }
+
 
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
@@ -196,6 +203,13 @@ class MovableObject {
 
 
     drawHitbox(ctx) {
+        this.hitboxEndboss(ctx);
+        this.hitboxPufferfish(ctx);
+        this.hitboxCharacter(ctx);
+    }
+
+
+    hitboxEndboss(ctx) {
         if (this instanceof Endboss || this instanceof Jellyfish) {
             ctx.beginPath();
             ctx.lineWidth = '3';
@@ -203,6 +217,10 @@ class MovableObject {
             ctx.rect(this.x, this.y, this.width, this.height)
             ctx.stroke();
         }
+    }
+
+
+    hitboxPufferfish(ctx) {
         if (this instanceof Pufferfish) {
             ctx.beginPath();
             ctx.lineWidth = '3';
@@ -210,6 +228,10 @@ class MovableObject {
             ctx.rect(this.x, this.y + 5, this.width, this.height - 30)
             ctx.stroke();
         }
+    }
+
+
+    hitboxCharacter(ctx) {
         if (this instanceof Character) {
             ctx.beginPath();
             ctx.lineWidth = '3';
@@ -242,32 +264,38 @@ class MovableObject {
         }
     }
 
+
     isHurt() {
         let sincelasthit = new Date().getTime() - this.lasthit;
         sincelasthit = sincelasthit / 1000;
         return sincelasthit < 1;
     }
 
+
     isDead() {
         return this.health < 1;
     }
+
 
     attackedBubble() {
         return this.used_attack_Bubble;
     }
 
+
     attackedFinSlap() {
         return this.used_attack_FinSLap
     }
+
+
     randomNumber(min, max) {
         return Math.random() * (max - min) + min;
     }
 
 
-    //test
     moveToDespawn() {
         this.x = -99;
     }
+
 
     playHurtSound() {
         this.hurt_sound.play()

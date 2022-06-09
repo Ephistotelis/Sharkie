@@ -10,8 +10,9 @@ let fullscreenbtn;
 let instructions;
 let instructionsPage;
 let scoreList = [];
-
-
+/**
+ * defines variables, load and render scoreboard
+ */
 
 function init() {
     canvas = document.getElementById('canvas')
@@ -26,7 +27,9 @@ function init() {
     renderScoreboard()
 }
 
-
+/**
+ * starting the game by showing the canvas and initialize the world object
+ */
 function startGame() {
     if (gamestart === false) {
         gamestart = true;
@@ -42,7 +45,9 @@ function startGame() {
 
 }
 
-
+/**
+ * shows endscreen by adding display style 
+ */
 function endScreen() {
     setInterval(() => {
         if (world.gameActiv == false) {
@@ -53,11 +58,81 @@ function endScreen() {
     }, 100);
 }
 
-
+/**
+ * reloads the page/the game
+ */
 function retry() {
     window.location.reload()
 }
 
+
+
+
+/**
+ * opens the element in fullscreenmode
+ * @param {element} elem - selected element, in this case the canvas
+ */
+
+
+function openFullscreen(elem) {
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+    }
+}
+/**
+ * saves the score in localstorage
+ * @param {number} score - the score which is calculated in endGame()
+ */
+
+function addScoreToLS(score) {
+    let endscore = score;
+    scoreList.push(endscore)
+    localStorage.setItem('Score', JSON.stringify(scoreList))
+}
+
+/**
+ * 
+ * loads the score from localstorage if existent
+ */
+function loadScore() {
+    let LSscore = localStorage.getItem('Score')
+    if (!LSscore) { return }
+    let LSscoreJSON = JSON.parse(LSscore)
+    scoreList = LSscoreJSON;
+}
+/**
+ * renders scoreboard and add 1 template für each score in the array
+ */
+
+function renderScoreboard() {
+    let scoreboard = document.getElementById('scores')
+    scoreboard.innerHTML = ''
+    for (let i = 0; i < scoreList.length; i++) {
+        let score = scoreList[i]
+        scoreboard.innerHTML += tempalateScoreBoard(i, score)
+    }
+}
+
+/**
+ *  clear the localstorage and scoreboard
+ * 
+ */
+function clearScore() {
+    localStorage.clear();
+    scoreList = [];
+    renderScoreboard();
+}
+
+/**
+ * functions to recognice keyboard inputs and change variables in keyboard object
+ * 
+ * @param {event} event - getting keydown event infos
+ * 
+ */
 document.addEventListener('keydown', (event) => {
     //multi consollogs
     /* console.log(event)
@@ -86,6 +161,7 @@ document.addEventListener('keydown', (event) => {
     // console.log('--------------')
 })
 
+
 document.addEventListener('keyup', (event) => {
 
     // console.log(event)
@@ -113,49 +189,3 @@ document.addEventListener('keyup', (event) => {
     }
     // console.log('--------------')
 })
-
-
-
-
-
-function openFullscreen(elem) {
-    if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-    } else if (elem.webkitRequestFullscreen) { /* Safari */
-        elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { /* IE11 */
-        elem.msRequestFullscreen();
-    }
-}
-
-
-function addScoreToLS(score) {
-    let endscore = score;
-    scoreList.push(endscore)
-    localStorage.setItem('Score', JSON.stringify(scoreList))
-}
-
-
-function loadScore() {
-    let LSscore = localStorage.getItem('Score')
-    if (!LSscore) { return }
-    let LSscoreJSON = JSON.parse(LSscore)
-    scoreList = LSscoreJSON;
-}
-
-
-function renderScoreboard() {
-    let scoreboard = document.getElementById('scores')
-    scoreboard.innerHTML = ''
-    for (let i = 0; i < scoreList.length; i++) {
-        let score = scoreList[i]
-        scoreboard.innerHTML += tempalateScoreBoard(i, score)
-    }
-}
-
-
-function clearScore() {
-    localStorage.clear();
-    scoreList = [];
-    renderScoreboard();
-}

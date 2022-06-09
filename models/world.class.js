@@ -142,7 +142,7 @@ class World {
                     enemy.attack_damag = 0;
                     enemy.DEAD = true;
                     this.addKillToScore(enemy);
-                    console.log(index, enemy)
+                    console.log(index, enemy) //                                consollog
                     setTimeout(() => {
                         enemy.moveToDespawn()
                         console.log(this.level.enemies)
@@ -226,75 +226,82 @@ class World {
 
     checkCollisions() {
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if (this.character.checkCollision(enemy)) {
-                    // console.log('hit by', enemy) // 
-                    if (this.character.immortal == false) {
-                        this.character.decreaseHealth(enemy);
-                    }
-                    enemy.decreaseHealth(this.character);
-                    if (this.gameActiv == true) {
-                        enemy.playHurtSound()
-                    }
-                    //  console.log("Character health:", this.character.health); //                                                                                  consollog
-                    // console.log("Enemy health", enemy.health); //                                                                                                   consollog
-                }
-            })
-            this.level.collectableObjects.forEach((item, index) => {
-                if (this.character.checkCollision(item)) {
-                    if (item instanceof Bottle) {
-                        this.character.reduceCD();
-                        this.sounds.collected_bottle.play()
-                    }
-                    if (item instanceof Coin) {
-                        this.character.addCoin();
-                        this.sounds.collected_coin.play()
-                    }
-                    this.level.collectableObjects.splice(index, 1)
-                }
-            })
-            this.level.endboss.forEach((enemy) => {
-                if (this.character.checkCollision(enemy)) {
-                    // console.log('hit by', enemy) //                                                                                                               consollog
-                    this.character.decreaseHealth(enemy);
-                    enemy.decreaseHealth(this.character);
-                    // console.log("Character health:", this.character.health); //                                                                                  consollog
-                    // console.log("Enemy health", enemy.health); //                                                                                                  consollog
-                }
-            })
+            this.checkCollisionChar();
+            this.checkCollisionCollectables()
+            this.checkCollisionEndboss()
         }, 100);
+    }
 
+
+    checkCollisionChar() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.checkCollision(enemy)) {
+                // console.log('hit by', enemy) // 
+                if (this.character.immortal == false) {
+                    this.character.decreaseHealth(enemy);
+                }
+                enemy.decreaseHealth(this.character);
+                if (this.gameActiv == true) {
+                    enemy.playHurtSound()
+                }
+                //  console.log("Character health:", this.character.health); //                                                                                  consollog
+                // console.log("Enemy health", enemy.health); //                                                                                                   consollog
+            }
+        })
+    }
+
+
+    checkCollisionCollectables() {
+        this.level.collectableObjects.forEach((item, index) => {
+            if (this.character.checkCollision(item)) {
+                if (item instanceof Bottle) {
+                    this.character.reduceCD();
+                    this.sounds.collected_bottle.play()
+                }
+                if (item instanceof Coin) {
+                    this.character.addCoin();
+                    this.sounds.collected_coin.play()
+                }
+                this.level.collectableObjects.splice(index, 1)
+            }
+        })
+    }
+
+
+    checkCollisionEndboss() {
+        this.level.endboss.forEach((enemy) => {
+            if (this.character.checkCollision(enemy)) {
+                // console.log('hit by', enemy) //                                                                                                               consollog
+                this.character.decreaseHealth(enemy);
+                enemy.decreaseHealth(this.character);
+                // console.log("Character health:", this.character.health); //                                                                                  consollog
+                // console.log("Enemy health", enemy.health); //                                                                                                  consollog
+            }
+        })
+    }
+
+
+    checkCollisionAttackEnemies() {
+        if (this.level.attackObject.length > 0) {
+            this.level.enemies.forEach((enemy) => {
+                for (let i = 0; i < this.level.attackObject.length; i++) {
+                    if (this.level.attackObject[i].checkCollision(enemy)) {
+                        // console.log('hit by', enemy) //                                                                                                               consollog
+                        enemy.decreaseHealth(this.level.attackObject[i]);
+                        enemy.playHurtSound()
+                        this.level.attackObject.splice(this.level.attackObject[i], 1)
+                        console.log("Character health:", this.character.health); //                                                                                  consollog
+                        console.log("Enemy health", enemy.health); //                                                                                                   consollog
+                    }
+                }
+            })
+        }
     }
 
 
     checkCollisionsAttack() {
         setInterval(() => {
-            if (this.level.attackObject.length > 0) {
-                this.level.enemies.forEach((enemy) => {
-                    for (let i = 0; i < this.level.attackObject.length; i++) {
-                        if (this.level.attackObject[i].checkCollision(enemy)) {
-                            // console.log('hit by', enemy) //                                                                                                               consollog
-                            enemy.decreaseHealth(this.level.attackObject[i]);
-                            enemy.playHurtSound()
-                            this.level.attackObject.splice(this.level.attackObject[i], 1)
-                            console.log("Character health:", this.character.health); //                                                                                  consollog
-                            console.log("Enemy health", enemy.health); //                                                                                                   consollog
-                        }
-                    }
-                });
-                this.level.endboss.forEach((enemy) => {
-                    for (let i = 0; i < this.level.attackObject.length; i++) {
-                        if (this.level.attackObject[i].checkCollision(enemy)) {
-                            // console.log('hit by', enemy) //                                                                                                               consollog
-                            enemy.decreaseHealth(this.level.attackObject[i]);
-                            this.level.attackObject.splice(this.level.attackObject[i], 1)
-                                // console.log("Character health:", this.character.health); //                                                                                  consollog
-                            console.log("Enemy health", enemy.health); //                                                                                                  consollog
-                        }
-                    }
-                })
-
-            }
+            this.checkCollisionAttackEnemies();
         }, 10);
     }
 
@@ -309,12 +316,7 @@ class World {
         if (this.gameActiv == true) {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
-            this.addObjectsToMap(this.level.backgroundObjectsAll)
-            this.addObjectsToMap(this.level.barriers)
-            this.addObjectsToMap(this.level.enemies)
-            this.addObjectsToMap(this.level.endboss)
-            this.addObjectsToMap(this.level.attackObject)
-            this.addObjectsToMap(this.level.collectableObjects)
+            this.addMultiObjectsToMap()
             this.addStatusBarsToMap(this.level.statusbars)
             this.addToMap(this.character)
 
@@ -324,6 +326,16 @@ class World {
                 self.draw();
             });
         }
+    }
+
+
+    addMultiObjectsToMap() {
+        this.addObjectsToMap(this.level.backgroundObjectsAll)
+        this.addObjectsToMap(this.level.barriers)
+        this.addObjectsToMap(this.level.enemies)
+        this.addObjectsToMap(this.level.endboss)
+        this.addObjectsToMap(this.level.attackObject)
+        this.addObjectsToMap(this.level.collectableObjects)
     }
 
 
@@ -348,7 +360,7 @@ class World {
 
     addToMap(mo) {
         mo.draw(this.ctx);
-        mo.drawHitbox(this.ctx)
+        // mo.drawHitbox(this.ctx)                                                                              // enable/disable hitbox
     }
 
 
@@ -358,8 +370,6 @@ class World {
                 this.score += 100;
                 this.level.statusbars[2].score = this.score;
                 //console.log(this.score)
-            } else {
-                return
             }
         }, 1000);
     }
