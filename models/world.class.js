@@ -6,9 +6,18 @@ class World {
     ctx;
     keyboard;
     score = 0;
+    wholeScoreKilled = 0;
     spawntimer = 1000;
     spawnedBoss = false;
-    enemies_killed = 0;
+    enemies_killed = {
+        'PF_easy': 0,
+        'PF_medium': 0,
+        'PF_hard': 0,
+        'JF_easy': 0,
+        'JF_medium': 0,
+        'JF_hard': 0,
+        'JF_veryhard': 0,
+    };
 
     gameActiv = false;
 
@@ -20,7 +29,7 @@ class World {
         "hurt_character": new Audio('audio/hurt.mp3'),
         "hurt_enemy": new Audio('audio/hurt_enemy.mp3'),
         "collected_coin": new Audio('audio/collectCoin.mp3'),
-        "collected_bottle": new Audio('audio/collectBottle.mp3'),
+        "collected_bottle": new Audio('audio/bottle.mp3'),
     }
 
 
@@ -61,11 +70,26 @@ class World {
         setInterval(() => {
             if (this.character.isDead() && this.isGameActiv()) {
                 this.gameActiv = false;
-                let endscore = this.score + (this.character.coins_collected * 500) + (this.enemies_killed * 300)
+                this.calcScoreKills()
+                let endscore = this.score + (this.character.coins_collected * 500) + (this.wholeScoreKilled)
                 addScoreToLS(endscore)
             }
         }, 100);
     }
+
+
+    calcScoreKills() {
+        let PF_easy = 150 * this.enemies_killed.PF_easy;
+        let PF_medium = 200 * this.enemies_killed.PF_medium;
+        let PF_hard = 300 * this.enemies_killed.PF_hard;
+        let JF_easy = 250 * this.enemies_killed.JF_easy;
+        let JF_medium = 300 * this.enemies_killed.JF_medium;
+        let JF_hard = 400 * this.enemies_killed.JF_hard;
+        let JF_veryhard = 500 * this.enemies_killed.JF_veryhard;
+
+        this.wholeScoreKilled = PF_easy + PF_medium + PF_hard + JF_easy + JF_medium + JF_hard + JF_veryhard
+    }
+
 
     despawnObjects() {
         setInterval(() => {
@@ -85,13 +109,39 @@ class World {
     }
 
 
+    addKillToScore(enemy) {
+        if (enemy instanceof Pufferfish_easy) {
+            this.enemies_killed.PF_easy += 1
+        }
+        if (enemy instanceof Pufferfish_medium) {
+            this.enemies_killed.PF_medium += 1
+        }
+        if (enemy instanceof Pufferfish_hard) {
+            this.enemies_killed.PF_hard += 1
+        }
+        if (enemy instanceof Jellyfish_easy) {
+            this.enemies_killed.JF_easy += 1
+        }
+        if (enemy instanceof Jellyfish_medium) {
+            this.enemies_killed.JF_medium += 1
+        }
+        if (enemy instanceof Jellyfish_hard) {
+            this.enemies_killed.JF_hard += 1
+        }
+        if (enemy instanceof Jellyfish_veryhard) {
+            this.enemies_killed.JF_veryhard += 1
+        }
+        console.warn('All enemies killed:', this.enemies_killed)
+    }
+
+
     despawnEnemiesWhenDead() {
         setInterval(() => {
             this.level.enemies.forEach((enemy, index) => {
                 if (enemy.isDead() && enemy.DEAD == false) {
                     enemy.attack_damag = 0;
                     enemy.DEAD = true;
-                    this.enemies_killed += 1;
+                    this.addKillToScore(enemy);
                     console.log(index, enemy)
                     setTimeout(() => {
                         enemy.moveToDespawn()
