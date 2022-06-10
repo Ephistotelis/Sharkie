@@ -57,14 +57,18 @@ class World {
         this.endGame();
         //this.speedGameProgress(); //     disabled for NOW
     }
+
+
     playSound(sound) {
         this.loadSound(sound);
         sound.play()
     }
 
+
     loadSound(sound) {
         sound.load()
     }
+
 
     endGame() {
         setInterval(() => {
@@ -131,7 +135,7 @@ class World {
         if (enemy instanceof Jellyfish_veryhard) {
             this.enemies_killed.JF_veryhard += 1
         }
-        console.warn('All enemies killed:', this.enemies_killed)
+        console.warn('All enemies killed:', this.enemies_killed) //                                                                 consollog
     }
 
 
@@ -147,8 +151,8 @@ class World {
                         enemy.moveToDespawn()
                         console.log(this.level.enemies)
                     }, 600);
-                    //console.log(this.level.enemies)
-                    //console.log('enemy dead:', enemy)
+                    //console.log(this.level.enemies)                                                                               consollog
+                    //console.log('enemy dead:', enemy)                                                                             consollog
                 }
             })
         }, 10);
@@ -229,7 +233,7 @@ class World {
             this.checkCollisionChar();
             this.checkCollisionCollectables()
             this.checkCollisionEndboss()
-        }, 100);
+        }, 200);
     }
 
 

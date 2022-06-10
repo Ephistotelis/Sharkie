@@ -41,7 +41,7 @@ function templatesALL(page) {
 function templateInstructions1() {
     return `
     <div class="howItWorks">
-        <p>This game is designed as endless running game. <br> In progress the enemies will be harder to kill <br> and deal more damage to your Character! <br>For each Enemy you kill gain extra <b>300</b> points for your endscore </p>
+        <p>This game is designed as endless running game. <br> In progress the enemies will be harder to kill <br> and deal more damage to your Character! <br>For each Enemy you kill gain extra <b>Points</b> for your endscore! </p>
     </div>
     `
 }
@@ -49,7 +49,7 @@ function templateInstructions1() {
 function templateInstructions2() {
     return `
         <div class="howItWorks">
-            <p> Your Bubble Attack is by far your strongest tool, by dealing a big amount of damage! <br> But be carefull in use, due to its high cooldown! <br> Every time you collect a Bottle your abilitycooldown gets reduced!
+            <p> Your <b>Bubble Attack</b> is by far your strongest tool, by dealing a big amount of damage! <br> But be carefull in use, due to its high cooldown! <br> Every time you collect a <b>Bottle</b> your abilitycooldown gets reduced!
             </p>
         </div>
     `
@@ -58,7 +58,7 @@ function templateInstructions2() {
 function templateInstructions3() {
     return `
     <div class="howItWorks">
-        <p>Collecting Coins boost your Physicaldamge permanently! <br> Also you gonna receive a small heal and immortality for 2 seconds! <br> For each Coin collected you gain extra <b>500</b> points for your endscore!</p>
+        <p>Collecting Coins boost your Physicaldamge permanently! <br> Also you gonna receive a small <b>heal</b> and <b>immortality</b> for 2 seconds! <br> For each Coin collected you gain extra <b>500</b> points for your endscore!</p>
     </div>
     `
 }

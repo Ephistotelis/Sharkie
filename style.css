@@ -73,6 +73,11 @@ h1 {
     box-shadow: 0px 0px 5px 5px white;
 }
 
+.clearScoreBtn button:hover {
+    background-color: rgb(215, 255, 205);
+    box-shadow: 0px 0px 5px 5px rgb(215, 255, 205);
+}
+
 canvas {
     background-color: black;
     display: none;
@@ -81,6 +86,12 @@ canvas {
 .startBtn {
     background-color: transparent;
     border: none;
+}
+
+.startBtn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 5px rgba(255, 255, 255, 0.3);
 }
 
 .startBtn img {
@@ -93,6 +104,12 @@ canvas {
     display: none;
 }
 
+.fullScreenBtn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 5px rgba(255, 255, 255, 0.3);
+}
+
 .fullScreenBtn img {
     height: 65px;
 }
@@ -101,6 +118,12 @@ canvas {
     background-color: transparent;
     border: none;
     display: none;
+}
+
+.retryBtn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 5px rgba(255, 255, 255, 0.3);
 }
 
 .retryBtn img {
@@ -170,4 +193,8 @@ canvas {
 
 .pagebtn {
     cursor: pointer;
+}
+
+.instructionPages button:hover {
+    background-color: rgb(212, 255, 246) !important;
 }
